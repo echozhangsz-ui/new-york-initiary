@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>纽约6天行程 · David & Echo · 2026年9月</title>
+<style>
+:root {
+  --ink:#172033; --muted:#657087; --paper:#f4f6fa; --line:#dfe4ec;
+  --card:#fff; --shadow:0 18px 55px rgba(23,32,51,.10);
+  --nyc-yellow:#f5c218;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.55}
+.hero{background:linear-gradient(135deg,#0a1628 0%,#162238 45%,#0f1d30 100%);color:white;padding:72px 24px 54px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(90deg,rgba(245,194,24,.025) 0,rgba(245,194,24,.025) 1px,transparent 1px,transparent 72px),
+  repeating-linear-gradient(0deg,rgba(245,194,24,.025) 0,rgba(245,194,24,.025) 1px,transparent 1px,transparent 72px)}
+.hero:after{content:"NYC";position:absolute;right:-20px;bottom:-80px;font-size:320px;font-weight:900;color:rgba(245,194,24,.055);pointer-events:none}
+.hero-inner,.content{max-width:1320px;margin:auto}
+.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#f5c218;font-weight:800}
+h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:920px}
+.hero p{max-width:820px;color:#c7d0df;font-size:17px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:8px 14px;border-radius:999px;font-size:13px}
+.badge.highlight{background:rgba(245,194,24,.15);border-color:rgba(245,194,24,.5);color:#f5c218;font-weight:700}
+.nav-wrap{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:0 6px 25px rgba(23,32,51,.06)}
+.day-nav{max-width:1320px;margin:auto;padding:10px 20px;display:flex;gap:8px;overflow:auto}
+.day-nav a{color:var(--ink);text-decoration:none;white-space:nowrap;padding:9px 13px;border-radius:10px;border:1px solid var(--line);font-size:13px;font-weight:800}
+.day-nav a:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:8px}
+.day-nav span{font-weight:500;color:var(--muted);margin-left:5px}
+.content{padding:30px 20px 80px}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.summary-card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 28px rgba(23,32,51,.05)}
+.summary-card strong{display:block;font-size:28px;margin-bottom:4px}
+.summary-card span{color:var(--muted);font-size:13px}
+.notice{background:#fff7df;border:1px solid #ead18a;border-radius:16px;padding:16px 18px;margin:0 0 28px;font-size:14px}
+.day-card{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:18px;margin:0 0 32px;scroll-margin-top:86px}
+.day-visual{display:block;width:100%;height:auto;border-radius:20px}
+.day-heading{display:flex;justify-content:space-between;gap:24px;align-items:center;padding:16px 10px 14px}
+.eyebrow{color:var(--theme);font-size:13px;font-weight:900;letter-spacing:.16em;margin:0 0 4px}
+h2{font-size:clamp(26px,3vw,42px);margin:0}
+.route-line{color:var(--muted);margin:7px 0 0}
+.top-link{color:var(--theme);text-decoration:none;font-weight:800;font-size:13px;white-space:nowrap}
+.day-map-container{position:relative;height:460px;border-radius:16px;overflow:hidden;margin:0 0 16px;border:1px solid var(--line)}
+.day-map-container::after{content:'';position:absolute;inset:0;z-index:1000;cursor:default;pointer-events:all}
+.leaflet-control-attribution{font-size:10px!important}
+.stop-label{background:rgba(255,255,255,.93)!important;border:1px solid rgba(0,0,0,.18)!important;
+  box-shadow:0 1px 5px rgba(0,0,0,.22)!important;padding:2px 7px!important;
+  border-radius:4px!important;font-size:11px!important;font-weight:700!important;
+  color:#1a1a1a!important;white-space:nowrap!important;pointer-events:none!important}
+.stop-label::before{display:none!important}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px}
+table{width:100%;border-collapse:collapse;min-width:1260px}
+thead th{background:#f7f8fb;padding:13px 14px;text-align:left;font-size:12px;color:#59657b;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+tbody td{padding:15px 14px;border-bottom:1px solid #e9edf3;vertical-align:top;font-size:14px}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fafbfd}
+.time{width:120px} .time span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.place{width:200px} .place strong{display:block}
+.desc{min-width:285px;color:#3f4a5f}
+.ticket{width:155px;font-weight:700}
+.booking{width:175px;color:#5a6374}
+.transport{width:125px;color:#5a6374}
+.website{width:130px}
+.website a{color:var(--theme,#2f7dc1);text-decoration:none;font-size:13px;font-weight:600}
+.website a:hover{text-decoration:underline}
+.ov-legend{display:flex;flex-wrap:wrap;gap:10px 24px;padding:14px 10px 6px;font-size:13px;font-weight:700}
+.ov-legend span{color:var(--c,#888)}
+.ov-legend span::before{content:'●';margin-right:5px}
+.place-img{padding:0;width:72px;min-width:72px;height:1px;overflow:hidden}
+.place-img img{display:block;width:72px;height:100%;min-height:72px;object-fit:cover;border-radius:0}
+.place-img .no-img{width:72px;min-height:72px;height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;background:#f0f0f0}
+.sources{background:#101a2c;color:#c7d0df;padding:30px 24px}
+.sources-inner{max-width:1320px;margin:auto}
+.sources h3{color:white;margin-top:0}
+.sources p,.sources li{font-size:13px}
+.sources a{color:#9fc0ff}
+.footer-note{max-width:1320px;margin:0 auto;padding:18px 24px 38px;color:#717b8d;font-size:12px}
+@media(max-width:850px){
+ .hero{padding-top:48px} .summary-grid{grid-template-columns:repeat(2,1fr)} .day-heading{display:block} .top-link{display:inline-block;margin-top:12px}
+ .day-card{padding:10px;border-radius:20px} .content{padding-left:10px;padding-right:10px}
+}
+@media print{
+ .nav-wrap,.top-link{display:none} body{background:white} .hero{padding:35px 20px}
+ .day-card{box-shadow:none;break-inside:avoid;border-radius:12px} .day-visual{max-height:130px}
+ .sources{background:white;color:black} .sources h3{color:black}
+}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+</head>
+<body id="top">
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">NEW YORK · SEPT 19–24, 2026</div>
+    <h1>纽约 6 天行程</h1>
+    <p style="font-size:15px;color:rgba(245,194,24,.85);font-weight:700;margin:0 0 8px;letter-spacing:.04em">为 David &amp; Echo 定制</p>
+    <p>从中城地标到布鲁克林，从自由女神到哈莱姆，六天覆盖曼哈顿各区精华，以步行与地铁为主，慢下来感受城市人文。</p>
+    <div class="badges">
+      <span class="badge">2026年9月19–24日</span>
+      <span class="badge">6天纽约之旅</span>
+      <span class="badge">步行＋地铁为主</span>
+      <span class="badge">每天约10,000–16,000步</span>
+      <span class="badge">价格以美元计</span>
+    </div>
+  </div>
+</header>
+<div class="nav-wrap">
+  <nav class="day-nav"><a href="#day-1" style="--c:#e64b4b">DAY 1<span>9/19 中城地标</span></a><a href="#day-2" style="--c:#2f7dc1">DAY 2<span>9/20 中央公园</span></a><a href="#day-3" style="--c:#289768">DAY 3<span>9/21 自由女神</span></a><a href="#day-4" style="--c:#8d54b6">DAY 4<span>9/22 布鲁克林</span></a><a href="#day-5" style="--c:#e58b2b">DAY 5<span>9/23 High Line</span></a><a href="#day-6" style="--c:#a13e42">DAY 6<span>9/24 博物馆·出发</span></a></nav>
+</div>
+<main class="content">
+  <div class="summary-grid">
+    <div class="summary-card"><strong>6 DAYS</strong><span>中城 · 上城 · 下城 · 布鲁克林</span></div>
+    <div class="summary-card"><strong>40+</strong><span>景点、街区与文化体验</span></div>
+    <div class="summary-card"><strong>3</strong><span>重点博物馆</span></div>
+    <div class="summary-card"><strong>David &amp; Echo</strong><span>2026年9月19–24日</span></div>
+  </div>
+  <div class="notice"><strong>门票说明：</strong>票价会随日期、时段、促销和税费变化。表中价格是2026年7月查询到的成人参考价或价格区间，购票前应以景点官网结算页面为准。</div>
+
+  <section class="day-card" id="overview">
+    <div class="day-heading">
+      <div>
+        <p class="eyebrow" style="color:#3d6fa5">6-DAY OVERVIEW</p>
+        <h2>六天综合路线图</h2>
+        <p class="route-line">彩色圆框标示各天游览范围，同色折线为当天路线顺序</p>
+      </div>
+      <a class="top-link" href="#day-1" style="color:#3d6fa5">跳至第 1 天 ↓</a>
+    </div>
+    <div id="map-overview" class="day-map-container" style="height:580px"></div>
+    <div class="ov-legend">
+      <span style="--c:#e64b4b">DAY 1 · 9/19 · 中城地标</span>
+      <span style="--c:#2f7dc1">DAY 2 · 9/20 · 中央公园</span>
+      <span style="--c:#289768">DAY 3 · 9/21 · 自由女神</span>
+      <span style="--c:#8d54b6">DAY 4 · 9/22 · 布鲁克林</span>
+      <span style="--c:#e58b2b">DAY 5 · 9/23 · High Line</span>
+      <span style="--c:#a13e42">DAY 6 · 9/24 · 博物馆·出发</span>
+    </div>
+  </section>
+
+  <section class="day-card" id="day-1" style="--theme:#e64b4b">
+  
+    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="中城经典地标 · MoMA · 百老汇">
+      <defs>
+        <linearGradient id="gDAY1" x1="0" x2="1">
+          <stop offset="0%" stop-color="#e64b4b"/>
+          <stop offset="100%" stop-color="#17233a"/>
+        </linearGradient>
+        <pattern id="pDAY1" width="90" height="90" patternUnits="userSpaceOnUse">
+          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="260" rx="26" fill="url(#gDAY1)"/>
+      <rect width="1200" height="260" rx="26" fill="url(#pDAY1)"/>
+      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
+      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
+      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 1</text>
+      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月19日 · 周六</text>
+      <text x="58" y="152" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">中城经典地标 · MoMA · 百老汇</text>
+      <text x="1005" y="166" font-size="112" text-anchor="middle">🏙️</text>
+      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="60" cy="205" r="10" fill="white"/>
+      <circle cx="260" cy="205" r="10" fill="white"/>
+      <circle cx="460" cy="205" r="10" fill="white"/>
+      <circle cx="660" cy="205" r="10" fill="white"/>
+      <circle cx="850" cy="205" r="10" fill="white"/>
+    </svg>
+    <div class="day-heading">
+      <p class="route-line">Grand Central → Bryant Park → Empire State Building → MoMA → Rockefeller Center → Times Square</p>
+      <a class="top-link" href="#top">返回顶部 ↑</a>
+    </div>
+    <div id="map-d1" class="day-map-container"></div>
+    <div class="table-wrap"><table><thead>
+            <tr>
+              <th style="width:72px"></th>
+              <th>时间</th>
+              <th>游览地点</th>
+              <th>简单介绍</th>
+              <th>门票参考</th>
+              <th>预约提示</th>
+              <th>移动方式</th>
+              <th>官网链接</th>
+            </tr>
+          </thead><tbody>
+      <tr><td class="place-img"><img data-wiki="Grand_Central_Terminal" data-emoji="🏙️" alt="Grand Central Terminal" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏙️</div>'"></td><td class="time"><strong>08:30–09:30</strong><span>第 1 站</span></td><td class="place"><strong>Grand Central Terminal<br>中央车站</strong></td><td class="desc">车站主大厅、星空穹顶、四面钟与回音廊，是纽约最有代表性的室内公共空间之一。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.grandcentralterminal.com" target="_blank" rel="noopener">grandcentralterminal.com →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Chrysler_Building" data-emoji="🏙️" alt="Chrysler Building" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏙️</div>'"></td><td class="time"><strong>09:30–09:50</strong><span>第 2 站</span></td><td class="place"><strong>Chrysler Building<br>克莱斯勒大厦</strong></td><td class="desc">欣赏装饰艺术风格尖塔和金属建筑细节，以外观拍照为主。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行约5分钟</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="New_York_Public_Library" data-emoji="📚" alt="NYPL" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>📚</div>'"></td><td class="time"><strong>10:05–11:15</strong><span>第 3 站</span></td><td class="place"><strong>纽约公共图书馆<br>＋ Bryant Park</strong></td><td class="desc">参观图书馆大厅、石狮与古典建筑，再到后方公园短暂休息。</td><td class="ticket">免费</td><td class="booking">部分空间可能临时关闭</td><td class="transport">步行</td><td class="website"><a href="https://www.nypl.org" target="_blank" rel="noopener">nypl.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Empire_State_Building" data-emoji="🏙️" alt="Empire State Building" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏙️</div>'"></td><td class="time"><strong>11:25–12:00</strong><span>第 4 站</span></td><td class="place"><strong>Empire State Building<br>帝国大厦外观</strong></td><td class="desc">经典纽约摩天楼。本行程已有Edge观景台，因此这里主要看外观，避免重复购票。</td><td class="ticket">外观免费</td><td class="booking">不上观景台</td><td class="transport">步行</td><td class="website"><a href="https://www.esbnyc.com" target="_blank" rel="noopener">esbnyc.com →</a></td></tr>
+      <tr><td class="place-img"><div class="no-img">🍜</div></td><td class="time"><strong>12:00–13:00</strong><span>第 5 站</span></td><td class="place"><strong>Koreatown<br>韩国城午餐</strong></td><td class="desc">餐厅集中，适合汤饭、烤肉、炸鸡或快速简餐。</td><td class="ticket">餐费自理</td><td class="booking">热门餐厅可预约</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Museum_of_Modern_Art" data-emoji="🖼️" alt="MoMA" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🖼️</div>'"></td><td class="time"><strong>13:20–16:00</strong><span>第 6 站</span></td><td class="place"><strong>MoMA<br>纽约现代艺术博物馆</strong></td><td class="desc">梵高、毕加索、莫奈、达利、马蒂斯及现代设计收藏密度很高。</td><td class="ticket">成人约 $30</td><td class="booking">建议提前购票</td><td class="transport">地铁/步行</td><td class="website"><a href="https://www.moma.org" target="_blank" rel="noopener">moma.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Rockefeller_Center" data-emoji="🏙️" alt="Rockefeller Center" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏙️</div>'"></td><td class="time"><strong>16:00–17:30</strong><span>第 7 站</span></td><td class="place"><strong>第五大道＋洛克菲勒中心</strong></td><td class="desc">经过圣帕特里克大教堂、洛克菲勒中心和Radio City Music Hall。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.rockefellercenter.com" target="_blank" rel="noopener">rockefellercenter.com →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Times_Square" data-emoji="✨" alt="Times Square" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>✨</div>'"></td><td class="time"><strong>17:30–18:15</strong><span>第 8 站</span></td><td class="place"><strong>Times Square<br>时代广场</strong></td><td class="desc">先看傍晚街景，熟悉剧院位置并预留取票时间。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.timessquarenyc.org" target="_blank" rel="noopener">timessquarenyc.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Broadway_theatre" data-emoji="🎭" alt="Broadway" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🎭</div>'"></td><td class="time"><strong>19:00–22:15</strong><span>第 9 站</span></td><td class="place"><strong>Broadway Show<br>百老汇音乐剧</strong></td><td class="desc">选择经典或视觉效果强的剧目；散场后时代广场夜景自然呈现，无需另行安排。</td><td class="ticket">价格浮动较大</td><td class="booking">强烈建议提前订票</td><td class="transport">剧院区</td><td class="website"><a href="https://www.broadway.com" target="_blank" rel="noopener">broadway.com →</a></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="day-card" id="day-2" style="--theme:#2f7dc1">
+  
+    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="中央公园 · 大都会博物馆 · 哈莱姆爵士">
+      <defs>
+        <linearGradient id="gDAY2" x1="0" x2="1">
+          <stop offset="0%" stop-color="#2f7dc1"/>
+          <stop offset="100%" stop-color="#17233a"/>
+        </linearGradient>
+        <pattern id="pDAY2" width="90" height="90" patternUnits="userSpaceOnUse">
+          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="260" rx="26" fill="url(#gDAY2)"/>
+      <rect width="1200" height="260" rx="26" fill="url(#pDAY2)"/>
+      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
+      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
+      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 2</text>
+      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月20日 · 周日</text>
+      <text x="58" y="152" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">中央公园 · 大都会博物馆 · 哈莱姆</text>
+      <text x="1005" y="166" font-size="112" text-anchor="middle">🌳</text>
+      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="60" cy="205" r="10" fill="white"/>
+      <circle cx="260" cy="205" r="10" fill="white"/>
+      <circle cx="460" cy="205" r="10" fill="white"/>
+      <circle cx="660" cy="205" r="10" fill="white"/>
+      <circle cx="850" cy="205" r="10" fill="white"/>
+    </svg>
+    <div class="day-heading">
+      <p class="route-line">Columbus Circle → 中央公园 → The Met → Morningside Heights → 哈莱姆 → Harlem Jazz</p>
+      <a class="top-link" href="#top">返回顶部 ↑</a>
+    </div>
+    <div id="map-d2" class="day-map-container"></div>
+    <div class="table-wrap"><table><thead>
+            <tr>
+              <th style="width:72px"></th>
+              <th>时间</th>
+              <th>游览地点</th>
+              <th>简单介绍</th>
+              <th>门票参考</th>
+              <th>预约提示</th>
+              <th>移动方式</th>
+              <th>官网链接</th>
+            </tr>
+          </thead><tbody>
+      <tr><td class="place-img"><img data-wiki="Columbus_Circle" data-emoji="⭕" alt="Columbus Circle" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>⭕</div>'"></td><td class="time"><strong>08:30–09:00</strong><span>第 1 站</span></td><td class="place"><strong>Columbus Circle<br>哥伦布圆环</strong></td><td class="desc">从中央公园西南角进入，观察城市高楼、交通环岛和公园入口。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">地铁</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Central_Park" data-emoji="🌳" alt="Central Park" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌳</div>'"></td><td class="time"><strong>09:00–11:30</strong><span>第 2 站</span></td><td class="place"><strong>Central Park<br>中央公园核心路线</strong></td><td class="desc">The Mall、Bethesda Terrace、Bow Bridge、The Ramble与Belvedere Castle。</td><td class="ticket">免费</td><td class="booking">穿舒适步行鞋</td><td class="transport">步行</td><td class="website"><a href="https://www.centralparknyc.org" target="_blank" rel="noopener">centralparknyc.org →</a></td></tr>
+      <tr><td class="place-img"><div class="no-img">🍽️</div></td><td class="time"><strong>11:30–12:30</strong><span>第 3 站</span></td><td class="place"><strong>公园附近简餐</strong></td><td class="desc">建议三明治、沙拉或野餐，放松节奏，为下午博物馆蓄力。</td><td class="ticket">餐费自理</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Metropolitan_Museum_of_Art" data-emoji="🖼️" alt="The Met" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🖼️</div>'"></td><td class="time"><strong>12:30–17:30</strong><span>第 4 站</span></td><td class="place"><strong>The Metropolitan Museum of Art<br>大都会艺术博物馆</strong></td><td class="desc">预留5小时，重点看埃及馆、欧洲绘画、武器盔甲、希腊罗马与亚洲艺术，不必面面俱到。</td><td class="ticket">外州成人通常需购票</td><td class="booking">建议提前购票，并查看官网当日开放区域</td><td class="transport">步行</td><td class="website"><a href="https://www.metmuseum.org" target="_blank" rel="noopener">metmuseum.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Morningside_Heights,_Manhattan" data-emoji="🎓" alt="Morningside Heights" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🎓</div>'"></td><td class="time"><strong>17:30–18:30</strong><span>第 5 站</span></td><td class="place"><strong>Morningside Heights漫步<br>Columbia · Cathedral</strong></td><td class="desc">从博物馆出发，穿过中央公园向西，顺路游览圣约翰神圣大教堂（纽约最大的哥特式教堂）与哥伦比亚大学Low Plaza。不需要进入内部，感受校园与社区氛围即可。</td><td class="ticket">外观免费</td><td class="booking">无需预约</td><td class="transport">步行/地铁</td><td class="website"><a href="https://www.columbia.edu" target="_blank" rel="noopener">columbia.edu →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Harlem" data-emoji="🎷" alt="Harlem" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🎷</div>'"></td><td class="time"><strong>18:30–20:00</strong><span>第 6 站</span></td><td class="place"><strong>Harlem 125th Street<br>Apollo Theater · Soul Food晚餐</strong></td><td class="desc">沿125街感受哈莱姆文化，经过Apollo Theater（标志性音乐历史地标），在传统Soul Food餐厅用晚餐，例如Red Rooster或Sylvia's。</td><td class="ticket">餐费自理</td><td class="booking">热门餐厅建议提前预约</td><td class="transport">地铁</td><td class="website"><a href="https://www.apollotheater.org" target="_blank" rel="noopener">apollotheater.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Jazz_music" data-emoji="🎺" alt="Harlem Jazz" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🎺</div>'"></td><td class="time"><strong>20:15–22:15</strong><span>第 7 站</span></td><td class="place"><strong>Harlem Jazz 现场<br>Minton's · Shrine 等</strong></td><td class="desc">哈莱姆是爵士乐的发源地。Minton's Playhouse（历史爵士俱乐部）或 Shrine（周日现场通常精彩）是上佳选择。以现场音乐结束这一天，人文感极强。</td><td class="ticket">约$15–30（视场地）</td><td class="booking">强烈建议提前预约</td><td class="transport">步行</td><td class="website"><a href="https://www.mintonsharlem.com" target="_blank" rel="noopener">mintonsharlem.com →</a></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="day-card" id="day-3" style="--theme:#289768">
+  
+    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="自由女神 · 埃利斯岛 · 华尔街 · 9/11">
+      <defs>
+        <linearGradient id="gDAY3" x1="0" x2="1">
+          <stop offset="0%" stop-color="#289768"/>
+          <stop offset="100%" stop-color="#17233a"/>
+        </linearGradient>
+        <pattern id="pDAY3" width="90" height="90" patternUnits="userSpaceOnUse">
+          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="260" rx="26" fill="url(#gDAY3)"/>
+      <rect width="1200" height="260" rx="26" fill="url(#pDAY3)"/>
+      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
+      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
+      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 3</text>
+      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月21日 · 周一</text>
+      <text x="58" y="152" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">自由女神 · 埃利斯岛 · 华尔街 · 9/11</text>
+      <text x="1005" y="166" font-size="112" text-anchor="middle">🗽</text>
+      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="60" cy="205" r="10" fill="white"/>
+      <circle cx="260" cy="205" r="10" fill="white"/>
+      <circle cx="460" cy="205" r="10" fill="white"/>
+      <circle cx="660" cy="205" r="10" fill="white"/>
+      <circle cx="850" cy="205" r="10" fill="white"/>
+    </svg>
+    <div class="day-heading">
+      <p class="route-line">Battery Park → Liberty Island → Ellis Island → Wall Street → 9/11 Memorial → Oculus</p>
+      <a class="top-link" href="#top">返回顶部 ↑</a>
+    </div>
+    <div id="map-d3" class="day-map-container"></div>
+    <div class="table-wrap"><table><thead>
+            <tr>
+              <th style="width:72px"></th>
+              <th>时间</th>
+              <th>游览地点</th>
+              <th>简单介绍</th>
+              <th>门票参考</th>
+              <th>预约提示</th>
+              <th>移动方式</th>
+              <th>官网链接</th>
+            </tr>
+          </thead><tbody>
+      <tr><td class="place-img"><img data-wiki="Battery_Park" data-emoji="🌿" alt="Battery Park" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌿</div>'"></td><td class="time"><strong>08:00–08:30</strong><span>第 1 站</span></td><td class="place"><strong>Battery Park<br>炮台公园集合与安检</strong></td><td class="desc">尽早到达，预留安检和寻找码头的时间。</td><td class="ticket">免费进入公园</td><td class="booking">需持渡轮票</td><td class="transport">地铁</td><td class="website"><a href="https://batterypark.nyc" target="_blank" rel="noopener">batterypark.nyc →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Statue_of_Liberty" data-emoji="🗽" alt="Statue of Liberty" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🗽</div>'"></td><td class="time"><strong>08:30–10:30</strong><span>第 2 站</span></td><td class="place"><strong>Liberty Island<br>自由女神岛</strong></td><td class="desc">近距离看自由女神像、纽约港与下曼哈顿天际线。</td><td class="ticket">包含在官方渡轮票中</td><td class="booking">皇冠/基座须单独预约</td><td class="transport">官方渡轮</td><td class="website"><a href="https://www.nps.gov/stli" target="_blank" rel="noopener">nps.gov/stli →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Ellis_Island" data-emoji="🏛️" alt="Ellis Island" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏛️</div>'"></td><td class="time"><strong>10:30–12:30</strong><span>第 3 站</span></td><td class="place"><strong>Ellis Island<br>埃利斯岛</strong></td><td class="desc">参观移民博物馆，了解不同年代移民抵达美国的经历。</td><td class="ticket">通常含在渡轮票中</td><td class="booking">使用官方授权渡轮</td><td class="transport">渡轮</td><td class="website"><a href="https://www.nps.gov/elis" target="_blank" rel="noopener">nps.gov/elis →</a></td></tr>
+      <tr><td class="place-img"><div class="no-img">🥪</div></td><td class="time"><strong>12:30–13:15</strong><span>第 4 站</span></td><td class="place"><strong>Battery Park附近午餐</strong></td><td class="desc">以快速用餐为主，避免压缩下午博物馆时间。</td><td class="ticket">餐费自理</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Financial_District,_Manhattan" data-emoji="🏦" alt="Financial District" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏦</div>'"></td><td class="time"><strong>13:15–14:30</strong><span>第 5 站</span></td><td class="place"><strong>Financial District<br>金融区步行</strong></td><td class="desc">铜牛、Bowling Green、华尔街、纽约证券交易所、Federal Hall与三一教堂。</td><td class="ticket">免费</td><td class="booking">部分建筑仅看外观</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="National_September_11_Memorial_%26_Museum" data-emoji="🕊️" alt="9/11 Memorial" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🕊️</div>'"></td><td class="time"><strong>14:45–17:30</strong><span>第 6 站</span></td><td class="place"><strong>9/11 Memorial &amp; Museum</strong></td><td class="desc">纪念水池免费；博物馆展示遗迹、影像、物品与口述历史。</td><td class="ticket">博物馆约 $24–36</td><td class="booking">建议提前购票</td><td class="transport">步行</td><td class="website"><a href="https://www.911memorial.org" target="_blank" rel="noopener">911memorial.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Oculus,_New_York_City" data-emoji="🏗️" alt="Oculus" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏗️</div>'"></td><td class="time"><strong>17:30–18:00</strong><span>第 7 站</span></td><td class="place"><strong>Oculus<br>世贸中心交通枢纽</strong></td><td class="desc">白色钢结构公共建筑，内部空间极具辨识度。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.wtc.com" target="_blank" rel="noopener">wtc.com →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="One_World_Trade_Center" data-emoji="🏢" alt="One WTC" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏢</div>'"></td><td class="time"><strong>18:00–18:45</strong><span>第 8 站</span></td><td class="place"><strong>One World Trade Center外观</strong></td><td class="desc">本行程不重复购买观景台，主要欣赏建筑外观。</td><td class="ticket">外观免费</td><td class="booking">观景台可作为雨天备选</td><td class="transport">步行</td><td class="website"><a href="https://www.oneworldobservatory.com" target="_blank" rel="noopener">oneworldobservatory.com →</a></td></tr>
+      <tr><td class="place-img"><div class="no-img">🍷</div></td><td class="time"><strong>19:00–20:30</strong><span>第 9 站</span></td><td class="place"><strong>Tribeca晚餐</strong></td><td class="desc">仓库建筑、石板路和社区餐厅构成更安静的下城氛围；今天行程强度很大，好好吃一顿早点休息。</td><td class="ticket">餐费自理</td><td class="booking">建议预约</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="day-card" id="day-4" style="--theme:#8d54b6">
+  
+    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="布鲁克林 · DUMBO · 大桥 · 华埠 · SoHo">
+      <defs>
+        <linearGradient id="gDAY4" x1="0" x2="1">
+          <stop offset="0%" stop-color="#8d54b6"/>
+          <stop offset="100%" stop-color="#17233a"/>
+        </linearGradient>
+        <pattern id="pDAY4" width="90" height="90" patternUnits="userSpaceOnUse">
+          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="260" rx="26" fill="url(#gDAY4)"/>
+      <rect width="1200" height="260" rx="26" fill="url(#pDAY4)"/>
+      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
+      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
+      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 4</text>
+      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月22日 · 周二</text>
+      <text x="58" y="152" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">布鲁克林 · DUMBO · 大桥 · 华埠 · SoHo</text>
+      <text x="1005" y="166" font-size="112" text-anchor="middle">🌉</text>
+      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="60" cy="205" r="10" fill="white"/>
+      <circle cx="260" cy="205" r="10" fill="white"/>
+      <circle cx="460" cy="205" r="10" fill="white"/>
+      <circle cx="660" cy="205" r="10" fill="white"/>
+      <circle cx="850" cy="205" r="10" fill="white"/>
+    </svg>
+    <div class="day-heading">
+      <p class="route-line">Brooklyn Heights → Brooklyn Bridge Park → DUMBO → Brooklyn Bridge → Chinatown → SoHo</p>
+      <a class="top-link" href="#top">返回顶部 ↑</a>
+    </div>
+    <div id="map-d4" class="day-map-container"></div>
+    <div class="table-wrap"><table><thead>
+            <tr>
+              <th style="width:72px"></th>
+              <th>时间</th>
+              <th>游览地点</th>
+              <th>简单介绍</th>
+              <th>门票参考</th>
+              <th>预约提示</th>
+              <th>移动方式</th>
+              <th>官网链接</th>
+            </tr>
+          </thead><tbody>
+      <tr><td class="place-img"><img data-wiki="Brooklyn_Heights_Promenade" data-emoji="🌆" alt="Brooklyn Heights Promenade" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌆</div>'"></td><td class="time"><strong>08:30–09:30</strong><span>第 1 站</span></td><td class="place"><strong>Brooklyn Heights Promenade</strong></td><td class="desc">从高处看下曼哈顿、自由女神方向、东河和布鲁克林大桥。</td><td class="ticket">免费</td><td class="booking">早上人较少</td><td class="transport">地铁＋步行</td><td class="website"><a href="https://www.nycgovparks.org/parks/brooklyn-heights-promenade" target="_blank" rel="noopener">nycgovparks.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Brooklyn_Bridge_Park" data-emoji="🌳" alt="Brooklyn Bridge Park" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌳</div>'"></td><td class="time"><strong>09:30–10:30</strong><span>第 2 站</span></td><td class="place"><strong>Brooklyn Bridge Park</strong></td><td class="desc">沿水岸向DUMBO散步，观看曼哈顿天际线与桥梁。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.brooklynbridgepark.org" target="_blank" rel="noopener">brooklynbridgepark.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Dumbo,_Brooklyn" data-emoji="📸" alt="DUMBO" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>📸</div>'"></td><td class="time"><strong>10:30–11:15</strong><span>第 3 站</span></td><td class="place"><strong>DUMBO</strong></td><td class="desc">Washington Street经典机位、红砖仓库、Empire Stores与Jane's Carousel。</td><td class="ticket">街区免费</td><td class="booking">旋转木马另付费</td><td class="transport">步行</td><td class="website"><a href="https://www.dumbo.is" target="_blank" rel="noopener">dumbo.is →</a></td></tr>
+      <tr><td class="place-img"><div class="no-img">🍕</div></td><td class="time"><strong>11:15–12:15</strong><span>第 4 站</span></td><td class="place"><strong>DUMBO午餐</strong></td><td class="desc">可选披萨、熟食市场、汉堡或河边简餐。</td><td class="ticket">餐费自理</td><td class="booking">热门店可能排队</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Brooklyn_Bridge" data-emoji="🌉" alt="Brooklyn Bridge" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌉</div>'"></td><td class="time"><strong>12:15–13:15</strong><span>第 5 站</span></td><td class="place"><strong>Brooklyn Bridge<br>步行过桥</strong></td><td class="desc">从布鲁克林走向曼哈顿，天际线位于前方，拍照视角更好。</td><td class="ticket">免费</td><td class="booking">自行车道与步道分开</td><td class="transport">步行</td><td class="website"><a href="https://www.nyc.gov/html/dot/html/infrastructure/brooklyn-bridge.shtml" target="_blank" rel="noopener">nyc.gov →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="New_York_City_Hall" data-emoji="🏛️" alt="City Hall" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏛️</div>'"></td><td class="time"><strong>13:15–13:45</strong><span>第 6 站</span></td><td class="place"><strong>City Hall Park</strong></td><td class="desc">下桥后的过渡休息点，连接金融区与Chinatown。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Chinatown,_Manhattan" data-emoji="🏮" alt="Chinatown" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏮</div>'"></td><td class="time"><strong>14:00–15:30</strong><span>第 7 站</span></td><td class="place"><strong>Chinatown<br>纽约华埠</strong></td><td class="desc">Mott Street、Doyers Street、点心铺、小吃和华人商店。</td><td class="ticket">免费游览</td><td class="booking">小吃另付费</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Little_Italy,_Manhattan" data-emoji="🇮🇹" alt="Little Italy" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🇮🇹</div>'"></td><td class="time"><strong>15:30–16:00</strong><span>第 8 站</span></td><td class="place"><strong>Little Italy</strong></td><td class="desc">街区规模较小，经过和拍照即可。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="SoHo,_Manhattan" data-emoji="🛍️" alt="SoHo" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🛍️</div>'"></td><td class="time"><strong>16:00–18:00</strong><span>第 9 站</span></td><td class="place"><strong>SoHo</strong></td><td class="desc">欣赏铸铁建筑、画廊和商店，适合购物和咖啡休息。</td><td class="ticket">免费游览</td><td class="booking">购物自理</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Lower_East_Side" data-emoji="🎶" alt="Lower East Side" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🎶</div>'"></td><td class="time"><strong>18:15–21:30</strong><span>第 10 站</span></td><td class="place"><strong>Lower East Side<br>晚餐＋夜生活</strong></td><td class="desc">可选择现场音乐、喜剧、Speakeasy或屋顶酒吧。</td><td class="ticket">价格视场地而定</td><td class="booking">热门演出需预约</td><td class="transport">步行/地铁</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="day-card" id="day-5" style="--theme:#e58b2b">
+  
+    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="Hudson Yards · Edge · High Line · 西村">
+      <defs>
+        <linearGradient id="gDAY5" x1="0" x2="1">
+          <stop offset="0%" stop-color="#e58b2b"/>
+          <stop offset="100%" stop-color="#17233a"/>
+        </linearGradient>
+        <pattern id="pDAY5" width="90" height="90" patternUnits="userSpaceOnUse">
+          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="260" rx="26" fill="url(#gDAY5)"/>
+      <rect width="1200" height="260" rx="26" fill="url(#pDAY5)"/>
+      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
+      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
+      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 5</text>
+      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月23日 · 周三</text>
+      <text x="58" y="152" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">Hudson Yards · Edge · High Line · 西村</text>
+      <text x="1005" y="166" font-size="112" text-anchor="middle">🌇</text>
+      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="60" cy="205" r="10" fill="white"/>
+      <circle cx="260" cy="205" r="10" fill="white"/>
+      <circle cx="460" cy="205" r="10" fill="white"/>
+      <circle cx="660" cy="205" r="10" fill="white"/>
+      <circle cx="850" cy="205" r="10" fill="white"/>
+    </svg>
+    <div class="day-heading">
+      <p class="route-line">Hudson Yards → Edge → High Line → Chelsea Market → Little Island → West Village</p>
+      <a class="top-link" href="#top">返回顶部 ↑</a>
+    </div>
+    <div id="map-d5" class="day-map-container"></div>
+    <div class="table-wrap"><table><thead>
+            <tr>
+              <th style="width:72px"></th>
+              <th>时间</th>
+              <th>游览地点</th>
+              <th>简单介绍</th>
+              <th>门票参考</th>
+              <th>预约提示</th>
+              <th>移动方式</th>
+              <th>官网链接</th>
+            </tr>
+          </thead><tbody>
+      <tr><td class="place-img"><img data-wiki="Hudson_Yards,_Manhattan" data-emoji="🏙️" alt="Hudson Yards" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏙️</div>'"></td><td class="time"><strong>09:00–09:45</strong><span>第 1 站</span></td><td class="place"><strong>Hudson Yards＋Vessel</strong></td><td class="desc">参观新开发区高楼与公共空间，Vessel是否开放内部需当天确认。</td><td class="ticket">外观免费</td><td class="booking">内部可能需票</td><td class="transport">地铁</td><td class="website"><a href="https://www.hudsonyardsnewyork.com" target="_blank" rel="noopener">hudsonyardsnewyork.com →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Edge_(observation_deck)" data-emoji="🔭" alt="Edge NYC" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🔭</div>'"></td><td class="time"><strong>10:00–11:30</strong><span>第 2 站</span></td><td class="place"><strong>Edge NYC</strong></td><td class="desc">高层室内外观景台，可俯瞰曼哈顿、哈德逊河和城市网格。</td><td class="ticket">提前票约 $34 起；普通票约 $42 起</td><td class="booking">建议提前订时段</td><td class="transport">步行</td><td class="website"><a href="https://www.edgenyc.com" target="_blank" rel="noopener">edgenyc.com →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="High_Line_(New_York_City)" data-emoji="🌿" alt="High Line" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌿</div>'"></td><td class="time"><strong>11:30–13:00</strong><span>第 3 站</span></td><td class="place"><strong>High Line北段</strong></td><td class="desc">由旧高架铁路改造的线性公园，可观察城市建筑与公共艺术。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.thehighline.org" target="_blank" rel="noopener">thehighline.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Chelsea_Market" data-emoji="🛒" alt="Chelsea Market" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🛒</div>'"></td><td class="time"><strong>13:00–14:15</strong><span>第 4 站</span></td><td class="place"><strong>Chelsea Market午餐</strong></td><td class="desc">旧工业建筑改造的食品市场，选择多但午餐时间拥挤。</td><td class="ticket">餐费自理</td><td class="booking">先找座位</td><td class="transport">步行</td><td class="website"><a href="https://www.chelseamarket.com" target="_blank" rel="noopener">chelseamarket.com →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="High_Line_(New_York_City)" data-emoji="🌿" alt="High Line South" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌿</div>'"></td><td class="time"><strong>14:15–15:00</strong><span>第 5 站</span></td><td class="place"><strong>High Line南段</strong></td><td class="desc">继续向Meatpacking District前进。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.thehighline.org" target="_blank" rel="noopener">thehighline.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Little_Island_(park)" data-emoji="🏝️" alt="Little Island" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏝️</div>'"></td><td class="time"><strong>15:00–15:45</strong><span>第 6 站</span></td><td class="place"><strong>Little Island</strong></td><td class="desc">建在哈德逊河上的人工岛公园，适合休息、看河景和拍照。</td><td class="ticket">通常免费</td><td class="booking">特殊演出另计</td><td class="transport">步行</td><td class="website"><a href="https://littleisland.org" target="_blank" rel="noopener">littleisland.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Meatpacking_District,_Manhattan" data-emoji="🏘️" alt="Meatpacking District" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏘️</div>'"></td><td class="time"><strong>15:45–16:30</strong><span>第 7 站</span></td><td class="place"><strong>Meatpacking District</strong></td><td class="desc">仓库区转型后的时装、酒店与餐厅街区。</td><td class="ticket">免费游览</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.meatpacking-district.com" target="_blank" rel="noopener">meatpacking-district.com →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="West_Village" data-emoji="🏡" alt="West Village" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🏡</div>'"></td><td class="time"><strong>16:30–17:30</strong><span>第 8 站</span></td><td class="place"><strong>West Village漫步</strong></td><td class="desc">Bleecker Street、Grove Street红砖街区；放慢脚步感受社区氛围，顺路找到90 Bedford St公寓外观。</td><td class="ticket">免费</td><td class="booking">公寓外观仅拍照</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Friends_(TV_series)" data-emoji="☕" alt="Friends Apartment" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>☕</div>'"></td><td class="time"><strong>17:30–19:00</strong><span>第 9 站</span></td><td class="place"><strong>Little Owl · 老友记公寓<br>90 Bedford St</strong></td><td class="desc">《老友记》取景公寓的底层就是这家社区小餐厅；边吃饭边看公寓外墙，是影迷朝圣与实际用餐的完美结合。</td><td class="ticket">餐费自理</td><td class="booking">强烈建议提前预约，座位不多</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Washington_Square_Park" data-emoji="🎸" alt="Washington Square Park" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🎸</div>'"></td><td class="time"><strong>19:00–22:00</strong><span>第 10 站</span></td><td class="place"><strong>Washington Square＋爵士/喜剧</strong></td><td class="desc">先在公园感受街头文化和喷泉广场氛围，再进入附近小型爵士或即兴喜剧场地。</td><td class="ticket">公园免费；演出票另计</td><td class="booking">建议提前订票</td><td class="transport">步行</td><td class="website"><a href="https://www.nycgovparks.org/parks/washington-square-park" target="_blank" rel="noopener">nycgovparks.org →</a></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="day-card" id="day-6" style="--theme:#a13e42">
+  
+    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="自然历史博物馆 · 林肯中心 · 下午出发">
+      <defs>
+        <linearGradient id="gDAY6" x1="0" x2="1">
+          <stop offset="0%" stop-color="#a13e42"/>
+          <stop offset="100%" stop-color="#17233a"/>
+        </linearGradient>
+        <pattern id="pDAY6" width="90" height="90" patternUnits="userSpaceOnUse">
+          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="260" rx="26" fill="url(#gDAY6)"/>
+      <rect width="1200" height="260" rx="26" fill="url(#pDAY6)"/>
+      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
+      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
+      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 6</text>
+      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月24日 · 周四 · 当晚19:00飞机</text>
+      <text x="58" y="152" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">自然历史博物馆 · 林肯中心 · 下午出发</text>
+      <text x="1005" y="166" font-size="112" text-anchor="middle">🎷</text>
+      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="60" cy="205" r="10" fill="white"/>
+      <circle cx="260" cy="205" r="10" fill="white"/>
+      <circle cx="460" cy="205" r="10" fill="white"/>
+      <circle cx="660" cy="205" r="10" fill="white"/>
+      <circle cx="850" cy="205" r="10" fill="white"/>
+    </svg>
+    <div class="day-heading">
+      <p class="route-line">AMNH → 上西区午餐 → Lincoln Center → Riverside Park → ✈ 前往机场</p>
+      <a class="top-link" href="#top">返回顶部 ↑</a>
+    </div>
+    <div id="map-d6" class="day-map-container"></div>
+    <div class="table-wrap"><table><thead>
+            <tr>
+              <th style="width:72px"></th>
+              <th>时间</th>
+              <th>游览地点</th>
+              <th>简单介绍</th>
+              <th>门票参考</th>
+              <th>预约提示</th>
+              <th>移动方式</th>
+              <th>官网链接</th>
+            </tr>
+          </thead><tbody>
+      <tr><td class="place-img"><img data-wiki="American_Museum_of_Natural_History" data-emoji="🦕" alt="AMNH" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🦕</div>'"></td><td class="time"><strong>09:00–12:00</strong><span>第 1 站</span></td><td class="place"><strong>American Museum of Natural History</strong></td><td class="desc">重点看恐龙、海洋生命、人类起源、矿物宝石和宇宙展区。</td><td class="ticket">基础票通常约 $30 起</td><td class="booking">建议提前选择日期</td><td class="transport">地铁</td><td class="website"><a href="https://www.amnh.org" target="_blank" rel="noopener">amnh.org →</a></td></tr>
+      <tr><td class="place-img"><div class="no-img">🍗</div></td><td class="time"><strong>12:00–13:00</strong><span>第 2 站</span></td><td class="place"><strong>Upper West Side午餐</strong></td><td class="desc">体验更接近本地居民生活的上西区社区餐厅。</td><td class="ticket">餐费自理</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+      <tr><td class="place-img"><img data-wiki="Lincoln_Center_for_the_Performing_Arts" data-emoji="🎭" alt="Lincoln Center" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🎭</div>'"></td><td class="time"><strong>13:15–14:00</strong><span>第 3 站</span></td><td class="place"><strong>Lincoln Center</strong></td><td class="desc">纽约歌剧、芭蕾、交响乐与剧院集中的表演艺术中心。</td><td class="ticket">广场免费</td><td class="booking">演出另购票</td><td class="transport">地铁/步行</td><td class="website"><a href="https://www.lincolncenter.org" target="_blank" rel="noopener">lincolncenter.org →</a></td></tr>
+      <tr><td class="place-img"><img data-wiki="Riverside_Park_(Manhattan)" data-emoji="🌿" alt="Riverside Park" onerror="this.parentElement.innerHTML='<div class=&quot;no-img&quot;>🌿</div>'"></td><td class="time"><strong>14:00–14:45</strong><span>第 4 站</span></td><td class="place"><strong>Riverside Park<br>最后的哈德逊河景</strong></td><td class="desc">旅行最后一次在哈德逊河边散步，感受上西区宁静的社区气息，也是告别纽约的最好方式之一。</td><td class="ticket">免费</td><td class="booking">无需预约</td><td class="transport">步行</td><td class="website"><a href="https://www.riversideparknyc.org" target="_blank" rel="noopener">riversideparknyc.org →</a></td></tr>
+      <tr style="background:#fff9ec"><td class="place-img"><div class="no-img">✈️</div></td><td class="time"><strong>15:00 出发</strong><span>前往机场</span></td><td class="place"><strong>前往机场<br>19:00 航班</strong></td><td class="desc">建议出租车或Uber，避免行李拖累。JFK约1–1.5小时车程，EWR约45分钟。请于16:30前抵达机场，留足安检与登机时间。</td><td class="ticket">交通费自理</td><td class="booking">建议提前叫车，高峰期路况复杂</td><td class="transport">出租车/Uber</td><td class="website"><span style="color:var(--muted)">—</span></td></tr>
+    </tbody></table></div>
+  </section>
+
+</main>
+
+<section class="sources">
+  <div class="sources-inner">
+    <h3>门票信息参考</h3>
+    <ul>
+      <li>MoMA：成人票参考价 $30。</li>
+      <li>Edge：提前优惠票约 $34 起；普通定时票约 $42 起，通常另收处理费。</li>
+      <li>9/11 Museum：普通入场票参考区间 $24–36。</li>
+      <li>The Met：外州及海外游客通常需要购买固定票价门票；纽约州居民及部分地区学生适用"自定票价"政策。</li>
+      <li>自由女神与埃利斯岛：应通过Statue City Cruises官方授权渡轮购票；皇冠和基座需要对应票种。</li>
+    </ul>
+    <p>重要项目建议优先预约：自由女神渡轮/皇冠、百老汇、Edge、9/11 Museum、MoMA、爵士演出。</p>
+  </div>
+</section>
+<div class="footer-note">行程为 David &amp; Echo 2026年9月纽约之旅定制版本。具体开放时间、天气与地铁维修情况，请在出发前按实际日期进行最终确认。祝旅途顺利！</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+(function(){
+  var mapOpts={zoomControl:false,scrollWheelZoom:false,dragging:false,touchZoom:false,
+    doubleClickZoom:false,boxZoom:false,keyboard:false,attributionControl:true};
+  var tiles='https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var tileOpts={attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:19};
+
+  function mkIcon(n){
+    return L.divIcon({
+      html:'<div style="background:#e63333;color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.5);line-height:1">'+n+'</div>',
+      className:'',iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-15]
+    });
+  }
+
+  function initMap(id,route,stops){
+    var m=L.map(id,{zoomControl:false,scrollWheelZoom:false,dragging:false,
+      touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,attributionControl:true});
+    L.tileLayer(tiles,tileOpts).addTo(m);
+    L.polyline(route,{color:'#3d7ee7',weight:5,opacity:0.92,lineJoin:'round'}).addTo(m);
+    var bounds=L.latLngBounds();
+    stops.forEach(function(s){
+      bounds.extend(s.p);
+      L.marker(s.p,{icon:mkIcon(s.n)})
+       .bindTooltip('<b>'+s.n+'.</b> '+s.t,
+         {permanent:true,direction:'right',offset:[14,0],className:'stop-label'})
+       .addTo(m);
+    });
+    m.fitBounds(bounds,{paddingTopLeft:[40,40],paddingBottomRight:[180,40],maxZoom:15});
+  }
+
+  /* ── DAY 1 · Midtown ── */
+  initMap('map-d1',
+    [[40.7527,-73.9772],[40.7516,-73.9755],[40.7531,-73.9824],
+     [40.7484,-73.9856],[40.7473,-73.9878],[40.7614,-73.9776],
+     [40.7587,-73.9787],[40.7580,-73.9855],[40.7590,-73.9874]],
+    [{p:[40.7527,-73.9772],n:1,t:'Grand Central Terminal'},
+     {p:[40.7516,-73.9755],n:2,t:'Chrysler Building'},
+     {p:[40.7531,-73.9824],n:3,t:'NYPL / Bryant Park'},
+     {p:[40.7484,-73.9856],n:4,t:'Empire State Building'},
+     {p:[40.7473,-73.9878],n:5,t:'Koreatown 午餐'},
+     {p:[40.7614,-73.9776],n:6,t:'MoMA'},
+     {p:[40.7587,-73.9787],n:7,t:'Rockefeller Center'},
+     {p:[40.7580,-73.9855],n:8,t:'Times Square'},
+     {p:[40.7590,-73.9874],n:9,t:'Broadway Show'}]);
+
+  /* ── DAY 2 · Central Park + The Met + Harlem Jazz ── */
+  initMap('map-d2',
+    [[40.7681,-73.9819],[40.7736,-73.9724],[40.7751,-73.9714],
+     [40.7794,-73.9632],[40.8038,-73.9621],[40.8075,-73.9626],
+     [40.8088,-73.9468],[40.8070,-73.9420]],
+    [{p:[40.7681,-73.9819],n:1,t:'Columbus Circle'},
+     {p:[40.7736,-73.9724],n:2,t:'Central Park 核心'},
+     {p:[40.7751,-73.9714],n:3,t:'公园简餐'},
+     {p:[40.7794,-73.9632],n:4,t:'The Metropolitan Museum'},
+     {p:[40.8038,-73.9621],n:5,t:'Cathedral of St. John / Columbia'},
+     {p:[40.8088,-73.9468],n:6,t:'Harlem 125th · Apollo · 晚餐'},
+     {p:[40.8070,-73.9420],n:7,t:'Harlem Jazz 现场'}]);
+
+  /* ── DAY 3 · Lower Manhattan + Islands ── */
+  initMap('map-d3',
+    [[40.7032,-74.0170],[40.6892,-74.0445],[40.6996,-74.0396],
+     [40.7030,-74.0150],[40.7074,-74.0113],[40.7115,-74.0134],
+     [40.7111,-74.0098],[40.7127,-74.0134],[40.7163,-74.0086]],
+    [{p:[40.7032,-74.0170],n:1,t:'Battery Park'},
+     {p:[40.6892,-74.0445],n:2,t:'Liberty Island 自由女神'},
+     {p:[40.6996,-74.0396],n:3,t:'Ellis Island 埃利斯岛'},
+     {p:[40.7030,-74.0150],n:4,t:'Battery Park 午餐'},
+     {p:[40.7074,-74.0113],n:5,t:'Financial District 金融区'},
+     {p:[40.7115,-74.0134],n:6,t:'9/11 Memorial & Museum'},
+     {p:[40.7111,-74.0098],n:7,t:'Oculus'},
+     {p:[40.7127,-74.0134],n:8,t:'One World Trade Center'},
+     {p:[40.7163,-74.0086],n:9,t:'Tribeca 晚餐'}]);
+
+  /* ── DAY 4 · Brooklyn + SoHo ── */
+  initMap('map-d4',
+    [[40.6960,-73.9975],[40.7003,-73.9934],[40.7033,-73.9879],
+     [40.7033,-73.9879],[40.7061,-73.9969],[40.7128,-74.0059],
+     [40.7158,-73.9970],[40.7191,-73.9973],[40.7223,-74.0003],[40.7154,-73.9854]],
+    [{p:[40.6960,-73.9975],n:1,t:'Brooklyn Heights Promenade'},
+     {p:[40.7003,-73.9934],n:2,t:'Brooklyn Bridge Park'},
+     {p:[40.7033,-73.9879],n:3,t:'DUMBO'},
+     {p:[40.7033,-73.9879],n:4,t:'DUMBO 午餐'},
+     {p:[40.7061,-73.9969],n:5,t:'Brooklyn Bridge 步行'},
+     {p:[40.7128,-74.0059],n:6,t:'City Hall Park'},
+     {p:[40.7158,-73.9970],n:7,t:'Chinatown 华埠'},
+     {p:[40.7191,-73.9973],n:8,t:'Little Italy'},
+     {p:[40.7223,-74.0003],n:9,t:'SoHo'},
+     {p:[40.7154,-73.9854],n:10,t:'Lower East Side'}]);
+
+  /* ── DAY 5 · Hudson Yards + High Line + West Village ── */
+  initMap('map-d5',
+    [[40.7535,-74.0019],[40.7536,-74.0028],[40.7482,-74.0048],
+     [40.7424,-74.0060],[40.7398,-74.0076],[40.7374,-74.0098],
+     [40.7414,-74.0060],[40.7338,-74.0060],[40.7309,-74.0019],[40.7308,-73.9973]],
+    [{p:[40.7535,-74.0019],n:1,t:'Hudson Yards / Vessel'},
+     {p:[40.7536,-74.0028],n:2,t:'Edge NYC 观景台'},
+     {p:[40.7482,-74.0048],n:3,t:'High Line 北段'},
+     {p:[40.7424,-74.0060],n:4,t:'Chelsea Market 午餐'},
+     {p:[40.7398,-74.0076],n:5,t:'High Line 南段'},
+     {p:[40.7374,-74.0098],n:6,t:'Little Island'},
+     {p:[40.7414,-74.0060],n:7,t:'Meatpacking District'},
+     {p:[40.7338,-74.0060],n:8,t:'West Village 漫步'},
+     {p:[40.7334,-74.0052],n:9,t:'Little Owl · 老友记公寓'},
+     {p:[40.7308,-73.9973],n:10,t:'Washington Square'}]);
+
+  /* ── DAY 6 · UWS + Lincoln Center · 下午出发 ── */
+  initMap('map-d6',
+    [[40.7813,-73.9740],[40.7800,-73.9810],[40.7725,-73.9836],[40.7900,-73.9870]],
+    [{p:[40.7813,-73.9740],n:1,t:'American Museum of Natural History'},
+     {p:[40.7800,-73.9810],n:2,t:'上西区午餐'},
+     {p:[40.7725,-73.9836],n:3,t:'Lincoln Center'},
+     {p:[40.7900,-73.9870],n:4,t:'Riverside Park · 告别纽约'}]);
+})();
+</script>
+<script>
+/* ── OVERVIEW · All 6 days ── */
+(function(){
+  var m=L.map('map-overview',{zoomControl:false,scrollWheelZoom:false,dragging:false,
+    touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,attributionControl:true});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:19}).addTo(m);
+
+  /* larrow:true = arrow on left (bubble to right, zone is to the left/west)
+     larrow:false = arrow on right (bubble to left, zone is to the right/east) */
+  var days=[
+    {c:'#e64b4b',n:'DAY 1',sub:'9/19 中城地标',lpos:[40.757,-73.948],larrow:true,
+     pts:[[40.7527,-73.9772],[40.7516,-73.9755],[40.7531,-73.9824],[40.7484,-73.9856],
+          [40.7473,-73.9878],[40.7614,-73.9776],[40.7587,-73.9787],[40.7580,-73.9855],[40.7590,-73.9874]]},
+    {c:'#2f7dc1',n:'DAY 2',sub:'9/20 中央公园',lpos:[40.783,-73.928],larrow:true,
+     pts:[[40.7681,-73.9819],[40.7736,-73.9724],[40.7751,-73.9714],
+          [40.7794,-73.9632],[40.8038,-73.9621],[40.8075,-73.9626],[40.8088,-73.9468],[40.8070,-73.9420]]},
+    {c:'#289768',n:'DAY 3',sub:'9/21 自由女神',lpos:[40.700,-74.043],larrow:false,
+     pts:[[40.7032,-74.0170],[40.6892,-74.0445],[40.6996,-74.0396],[40.7030,-74.0150],
+          [40.7074,-74.0113],[40.7115,-74.0134],[40.7111,-74.0098],[40.7127,-74.0134],[40.7163,-74.0086]]},
+    {c:'#8d54b6',n:'DAY 4',sub:'9/22 布鲁克林',lpos:[40.715,-73.952],larrow:true,
+     pts:[[40.6960,-73.9975],[40.7003,-73.9934],[40.7033,-73.9879],[40.7061,-73.9969],
+          [40.7128,-74.0059],[40.7158,-73.9970],[40.7191,-73.9973],[40.7223,-74.0003],[40.7154,-73.9854]]},
+    {c:'#e58b2b',n:'DAY 5',sub:'9/23 High Line',lpos:[40.740,-74.013],larrow:false,
+     pts:[[40.7535,-74.0019],[40.7536,-74.0028],[40.7482,-74.0048],[40.7424,-74.0060],
+          [40.7398,-74.0076],[40.7374,-74.0098],[40.7414,-74.0060],[40.7338,-74.0060],
+          [40.7334,-74.0052],[40.7308,-73.9973]]},
+    {c:'#a13e42',n:'DAY 6',sub:'9/24 博物馆·出发',lpos:[40.801,-73.924],larrow:true,
+     pts:[[40.7813,-73.9740],[40.7800,-73.9810],[40.7725,-73.9836],[40.7900,-73.9870]]}
+  ];
+
+  function cross(O,A,B){return(A[0]-O[0])*(B[1]-O[1])-(A[1]-O[1])*(B[0]-O[0]);}
+  function convexHull(pts){
+    var s=pts.slice().sort(function(a,b){return a[1]-b[1]||a[0]-b[0];});
+    var lo=[],hi=[];
+    s.forEach(function(p){while(lo.length>=2&&cross(lo[lo.length-2],lo[lo.length-1],p)<=0)lo.pop();lo.push(p);});
+    s.slice().reverse().forEach(function(p){while(hi.length>=2&&cross(hi[hi.length-2],hi[hi.length-1],p)<=0)hi.pop();hi.push(p);});
+    hi.pop();lo.pop();return lo.concat(hi);
+  }
+  function expandHull(h,pad){
+    var clat=0,clng=0;
+    h.forEach(function(p){clat+=p[0];clng+=p[1];});
+    clat/=h.length;clng/=h.length;
+    return h.map(function(p){
+      var dl=p[0]-clat,dn=p[1]-clng,d=Math.sqrt(dl*dl+dn*dn)||0.001;
+      return[clat+dl*(d+pad)/d,clng+dn*(d+pad)/d];
+    });
+  }
+
+  function makeBubble(color,title,subtitle,arrowLeft){
+    var tri='width:0;height:0;flex-shrink:0;align-self:center;border-top:4px solid transparent;border-bottom:4px solid transparent;';
+    var arrowDiv=arrowLeft
+      ? '<div style="'+tri+'border-right:22px solid '+color+'"></div>'
+      : '<div style="'+tri+'border-left:22px solid '+color+'"></div>';
+    var bubble='<div style="background:#fff;border:2px solid '+color+';border-radius:7px;'
+      +'padding:4px 11px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.28)">'
+      +'<b style="font-size:12px;color:'+color+'">'+title+'</b><br>'
+      +'<span style="font-size:10px;color:#555;font-weight:500">'+subtitle+'</span>'
+      +'</div>';
+    var html='<div style="display:inline-flex;align-items:center;pointer-events:none">'
+      +(arrowLeft ? arrowDiv+bubble : bubble+arrowDiv)+'</div>';
+    return {html:html, anchor:arrowLeft ? [0,20] : [138,20]};
+  }
+
+  var allBounds=L.latLngBounds();
+  days.forEach(function(day){
+    day.pts.forEach(function(p){allBounds.extend(p);});
+    allBounds.extend(day.lpos);
+  });
+
+  days.forEach(function(day){
+    var h=expandHull(convexHull(day.pts),0.006);
+    L.polygon(h,{color:day.c,weight:2.5,opacity:0.9,fill:true,fillColor:day.c,
+      fillOpacity:0.09,dashArray:'9,5',lineJoin:'round'}).addTo(m);
+    L.polyline(day.pts,{color:day.c,weight:3.5,opacity:0.9,lineJoin:'round'}).addTo(m);
+    day.pts.forEach(function(p){
+      L.circleMarker(p,{radius:5,color:'#fff',weight:1.5,fillColor:day.c,fillOpacity:1}).addTo(m);
+    });
+    var b=makeBubble(day.c,day.n,day.sub,day.larrow);
+    L.marker(day.lpos,{icon:L.divIcon({html:b.html,className:'',iconSize:null,iconAnchor:b.anchor})}).addTo(m);
+  });
+
+  m.fitBounds(allBounds,{paddingTopLeft:[50,50],paddingBottomRight:[60,40],maxZoom:13});
+})();
+</script>
+<script>
+(function(){
+  var imgs = document.querySelectorAll('td.place-img img[data-wiki]');
+  imgs.forEach(function(img){
+    var title = img.getAttribute('data-wiki');
+    fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title))
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.thumbnail && d.thumbnail.source){
+          img.src = d.thumbnail.source;
+        } else {
+          var emoji = img.getAttribute('data-emoji');
+          img.parentElement.innerHTML = '<div class="no-img">'+emoji+'</div>';
+        }
+      })
+      .catch(function(){ img.remove(); });
+  });
+})();
+</script>
+</body>
+</html>
