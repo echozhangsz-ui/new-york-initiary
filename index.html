@@ -120,6 +120,16 @@ body.lang-zh [data-zh]{display:inline}
 .star-bar::after{content:'★★★★★'}
 .star-bar::before{content:'★★★★★';position:absolute;left:0;top:0;overflow:hidden;width:var(--pct,0%);color:#f5c218;white-space:nowrap}
 .rating-num{font-size:9px;font-weight:900;color:#fff;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+/* Language-only spans for HTML-rich content (notice, disclaimer) */
+.lang-fr-only,.lang-zh-only{display:none}
+body.lang-fr .lang-fr-only{display:inline}
+body.lang-zh .lang-zh-only{display:inline}
+/* Overview two-column layout */
+.overview-layout{display:flex;gap:28px;align-items:flex-start}
+.overview-sidebar{flex:0 0 270px;padding-top:4px}
+.overview-sidebar .ov-legend{padding:14px 0 6px;flex-direction:column;gap:8px}
+.overview-map-wrap{flex:1;min-width:0;border-radius:16px;overflow:hidden}
+@media(max-width:900px){.overview-layout{flex-direction:column}.overview-sidebar{flex:none;width:100%}.overview-sidebar .ov-legend{flex-direction:row;flex-wrap:wrap}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
@@ -154,7 +164,7 @@ body.lang-zh [data-zh]{display:inline}
     <div class="summary-card"><strong>3</strong><span><span data-fr="Grands musées"></span><span data-zh="重点博物馆"></span></span></div>
     <div class="summary-card"><strong>David &amp; Echo</strong><span><span data-fr="19–24 septembre 2026"></span><span data-zh="2026年9月19–24日"></span></span></div>
   </div>
-  <div class="notice"><span data-fr><strong>Tarifs :</strong> Les prix varient selon la date, l'horaire, les promotions et les taxes. Les tarifs indiqués sont des références consultées en juillet 2026 pour un adulte. Vérifiez toujours sur le site officiel avant d'acheter.</span><span data-zh><strong>门票说明：</strong>票价会随日期、时段、促销和税费变化。表中价格是2026年7月查询到的成人参考价或价格区间，购票前应以景点官网结算页面为准。</span></div>
+  <div class="notice"><span class="lang-fr-only"><strong>Tarifs :</strong> Les prix varient selon la date, l'horaire, les promotions et les taxes. Les tarifs indiqués sont des références consultées en juillet 2026 pour un adulte. Vérifiez toujours sur le site officiel avant d'acheter.</span><span class="lang-zh-only"><strong>门票说明：</strong>票价会随日期、时段、促销和税费变化。表中价格是2026年7月查询到的成人参考价或价格区间，购票前应以景点官网结算页面为准。</span></div>
 
   <section class="day-card" id="weather">
     <div class="day-heading">
@@ -268,26 +278,28 @@ body.lang-zh [data-zh]{display:inline}
         </div>
       </div>
     </div>
-    <p class="wx-disclaimer"><span data-fr>⚠ Données climatiques historiques moyennes pour la mi-septembre à New York (source : relevés météo). Les prévisions réelles seront disponibles 7 à 10 jours avant le départ.</span><span data-zh>⚠ 以上数据为纽约九月中旬历史气候平均值（参考气象记录），仅供行程规划参考。出发前7–10天可查看实时天气预报。</span></p>
+    <p class="wx-disclaimer"><span class="lang-fr-only">⚠ Données climatiques historiques moyennes pour la mi-septembre à New York (source : relevés météo). Les prévisions réelles seront disponibles 7 à 10 jours avant le départ.</span><span class="lang-zh-only">⚠ 以上数据为纽约九月中旬历史气候平均值（参考气象记录），仅供行程规划参考。出发前7–10天可查看实时天气预报。</span></p>
   </section>
 
   <section class="day-card" id="overview">
-    <div class="day-heading">
-      <div>
+    <div class="overview-layout">
+      <div class="overview-sidebar">
         <p class="eyebrow" style="color:#3d6fa5">6-DAY OVERVIEW</p>
         <h2><span data-fr="Carte Générale · 6 Jours"></span><span data-zh="六天综合路线图"></span></h2>
         <p class="route-line"><span data-fr="Les zones colorées indiquent le secteur du jour ; les lignes montrent l'ordre de visite"></span><span data-zh="彩色圆框标示各天游览范围，同色折线为当天路线顺序"></span></p>
+        <div class="ov-legend">
+          <span style="--c:#e64b4b"><span data-fr="DAY 1 · 9/19 · Midtown"></span><span data-zh="DAY 1 · 9/19 · 中城地标"></span></span>
+          <span style="--c:#2f7dc1"><span data-fr="DAY 2 · 9/20 · Central Park"></span><span data-zh="DAY 2 · 9/20 · 中央公园"></span></span>
+          <span style="--c:#289768"><span data-fr="DAY 3 · 9/21 · Statue Liberté"></span><span data-zh="DAY 3 · 9/21 · 自由女神"></span></span>
+          <span style="--c:#8d54b6"><span data-fr="DAY 4 · 9/22 · Brooklyn"></span><span data-zh="DAY 4 · 9/22 · 布鲁克林"></span></span>
+          <span style="--c:#e58b2b"><span data-fr="DAY 5 · 9/23 · High Line"></span><span data-zh="DAY 5 · 9/23 · High Line"></span></span>
+          <span style="--c:#a13e42"><span data-fr="DAY 6 · 9/24 · Musée · Départ"></span><span data-zh="DAY 6 · 9/24 · 博物馆·出发"></span></span>
+        </div>
+        <a class="top-link" href="#day-1" style="color:#3d6fa5;display:inline-block;margin-top:18px"><span data-fr="Voir Jour 1 ↓"></span><span data-zh="跳至第 1 天 ↓"></span></a>
       </div>
-      <a class="top-link" href="#day-1" style="color:#3d6fa5"><span data-fr="Voir Jour 1 ↓"></span><span data-zh="跳至第 1 天 ↓"></span></a>
-    </div>
-    <div id="map-overview" class="day-map-container" style="height:580px"></div>
-    <div class="ov-legend">
-      <span style="--c:#e64b4b"><span data-fr="DAY 1 · 9/19 · Midtown"></span><span data-zh="DAY 1 · 9/19 · 中城地标"></span></span>
-      <span style="--c:#2f7dc1"><span data-fr="DAY 2 · 9/20 · Central Park"></span><span data-zh="DAY 2 · 9/20 · 中央公园"></span></span>
-      <span style="--c:#289768"><span data-fr="DAY 3 · 9/21 · Statue Liberté"></span><span data-zh="DAY 3 · 9/21 · 自由女神"></span></span>
-      <span style="--c:#8d54b6"><span data-fr="DAY 4 · 9/22 · Brooklyn"></span><span data-zh="DAY 4 · 9/22 · 布鲁克林"></span></span>
-      <span style="--c:#e58b2b"><span data-fr="DAY 5 · 9/23 · High Line"></span><span data-zh="DAY 5 · 9/23 · High Line"></span></span>
-      <span style="--c:#a13e42"><span data-fr="DAY 6 · 9/24 · Musée · Départ"></span><span data-zh="DAY 6 · 9/24 · 博物馆·出发"></span></span>
+      <div class="overview-map-wrap">
+        <div id="map-overview" class="day-map-container" style="height:720px"></div>
+      </div>
     </div>
   </section>
 
@@ -837,7 +849,7 @@ body.lang-zh [data-zh]{display:inline}
     L.marker(day.lpos,{icon:L.divIcon({html:b.html,className:'',iconSize:null,iconAnchor:b.anchor})}).addTo(m);
   });
 
-  m.fitBounds(allBounds,{paddingTopLeft:[50,50],paddingBottomRight:[60,40],maxZoom:13});
+  m.fitBounds(allBounds,{paddingTopLeft:[50,50],paddingBottomRight:[60,40],maxZoom:14});
 })();
 </script>
 <script>
