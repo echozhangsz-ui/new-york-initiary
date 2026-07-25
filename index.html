@@ -90,8 +90,8 @@ tbody tr:hover{background:#fafbfd}
 }
 /* ── Language toggle ── */
 [data-fr],[data-zh]{display:none}
-body.lang-fr [data-fr]{display:revert}
-body.lang-zh [data-zh]{display:revert}
+body.lang-fr [data-fr]{display:inline}
+body.lang-zh [data-zh]{display:inline}
 .lang-switch{position:fixed;top:14px;right:18px;z-index:9999;display:flex;gap:6px}
 .lang-btn{padding:6px 13px;border:1.5px solid rgba(255,255,255,.35);border-radius:999px;
   background:rgba(10,22,40,.75);color:rgba(255,255,255,.75);font-size:12px;font-weight:700;
@@ -724,6 +724,10 @@ body.lang-zh [data-zh]{display:revert}
 </script>
 <script>
 (function(){
+  /* Populate each span's text content from its data-fr / data-zh attribute value */
+  document.querySelectorAll('[data-fr]').forEach(function(el){el.textContent=el.getAttribute('data-fr');});
+  document.querySelectorAll('[data-zh]').forEach(function(el){el.textContent=el.getAttribute('data-zh');});
+
   var svgTitles={
     'svgt-d1':{fr:'Midtown · MoMA · Broadway',zh:'中城经典地标 · MoMA · 百老汇'},
     'svgt-d2':{fr:'Central Park · The Met · Harlem Jazz',zh:'中央公园 · 大都会博物馆 · 哈莱姆'},
