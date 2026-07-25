@@ -14,17 +14,23 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.55}
-.hero{background-color:#0a1628;background-size:cover;background-position:center 30%;color:white;padding:72px 24px 54px;position:relative;overflow:hidden}
+.hero{background-color:#0a1628;background-image:url('assets/hero-statue-liberty.png');
+  background-size:cover;background-position:center 42%;color:white;
+  padding:72px 24px 54px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to right,rgba(4,10,22,.96) 0%,rgba(4,10,22,.88) 60%,rgba(4,10,22,.80) 100%)}
-.hero:after{content:"NYC";position:absolute;right:-20px;bottom:-80px;font-size:320px;font-weight:900;color:rgba(245,194,24,.04);pointer-events:none}
+  z-index:1;background:
+  radial-gradient(circle at 32% 48%,rgba(245,194,24,.10) 0%,rgba(245,194,24,0) 30%),
+  linear-gradient(to right,rgba(4,10,22,.62) 0%,rgba(4,10,22,.34) 48%,rgba(4,10,22,.10) 100%),
+  linear-gradient(to bottom,rgba(4,10,22,.05) 0%,rgba(4,10,22,.24) 100%)}
+.hero:after{content:"NEW YORK";position:absolute;right:28px;bottom:8px;font-size:clamp(92px,17vw,240px);line-height:.82;font-weight:900;letter-spacing:.02em;white-space:nowrap;color:rgba(245,194,24,.08);pointer-events:none;z-index:1}
 .hero-inner,.content{max-width:1320px;margin:auto}
-.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#f5c218;font-weight:800;text-shadow:0 1px 4px rgba(0,0,0,.8)}
-h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:920px;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.8)}
-.hero p{max-width:820px;color:#fff;font-size:17px;text-shadow:0 1px 8px rgba(0,0,0,.9)}
+.hero-inner{position:relative;z-index:2}
+.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#ffd45a;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,.85)}
+h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:920px;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.95),0 1px 3px rgba(0,0,0,.95)}
+.hero p{max-width:820px;color:#fff;font-size:17px;text-shadow:0 2px 12px rgba(0,0,0,.95)}
 .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.badge{background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.50);padding:8px 14px;border-radius:999px;font-size:13px;color:#fff;font-weight:600}
-.badge.highlight{background:rgba(245,194,24,.28);border-color:#f5c218;color:#f5c218;font-weight:700}
+.badge{background:rgba(8,16,30,.50);border:1.5px solid rgba(255,255,255,.55);padding:8px 14px;border-radius:999px;font-size:13px;color:#fff;font-weight:700;backdrop-filter:blur(8px);box-shadow:0 8px 22px rgba(0,0,0,.20)}
+.badge.highlight{background:rgba(245,194,24,.92);border-color:#f5c218;color:#0a1628;font-weight:900}
 .nav-wrap{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:0 6px 25px rgba(23,32,51,.06)}
 .day-nav{max-width:1320px;margin:auto;padding:10px 20px;display:flex;gap:8px;overflow:auto}
 .day-nav a{color:var(--ink);text-decoration:none;white-space:nowrap;padding:9px 13px;border-radius:10px;border:1px solid var(--line);font-size:13px;font-weight:800}
@@ -43,6 +49,19 @@ h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:
 h2{font-size:clamp(26px,3vw,42px);margin:0}
 .route-line{color:var(--muted);margin:7px 0 0}
 .top-link{color:var(--theme);text-decoration:none;font-weight:800;font-size:13px;white-space:nowrap}
+.day-brief{display:grid;grid-template-columns:1.05fr repeat(4,minmax(0,1fr));gap:10px;margin:0 0 16px}
+.brief-card{border:1px solid var(--line);border-left:4px solid var(--theme);border-radius:12px;background:#fff;padding:13px 14px;min-height:96px}
+.brief-card.primary{background:linear-gradient(135deg,color-mix(in srgb,var(--theme) 10%,#fff),#fff)}
+.brief-label{display:block;margin-bottom:6px;color:var(--theme);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.brief-card strong{display:block;margin-bottom:4px;font-size:15px;line-height:1.25}
+.brief-card > span:not(.brief-label){display:block;color:#566174;font-size:13px;line-height:1.45}
+.day-brief .brief-card [data-fr],.day-brief .brief-card [data-zh]{display:none!important}
+body.lang-fr .day-brief .brief-card [data-fr]{display:inline!important}
+body.lang-zh .day-brief .brief-card [data-zh]{display:inline!important}
+.brief-label [data-fr],.brief-label [data-zh]{color:inherit;font-size:inherit;line-height:inherit}
+.brief-meter{display:flex;gap:4px;margin:8px 0 7px}
+.brief-meter i{display:block;height:7px;flex:1;border-radius:999px;background:#e6ebf2}
+.brief-meter i.on{background:var(--theme)}
 .day-map-container{position:relative;height:460px;border-radius:16px;overflow:hidden;margin:0 0 16px;border:1px solid var(--line)}
 .day-map-container::after{content:'';position:absolute;inset:0;z-index:1000;cursor:default;pointer-events:all}
 .leaflet-control-attribution{font-size:10px!important}
@@ -81,7 +100,9 @@ tbody tr:hover{background:#fafbfd}
 @media(max-width:850px){
  .hero{padding-top:48px} .summary-grid{grid-template-columns:repeat(2,1fr)} .day-heading{display:block} .top-link{display:inline-block;margin-top:12px}
  .day-card{padding:10px;border-radius:20px} .content{padding-left:10px;padding-right:10px}
+ .day-brief{grid-template-columns:1fr 1fr}.brief-card.primary{grid-column:1/-1}
 }
+@media(max-width:560px){.day-brief{grid-template-columns:1fr}}
 @media print{
  .nav-wrap,.top-link{display:none} body{background:white} .hero{padding:35px 20px}
  .day-card{box-shadow:none;break-inside:avoid;border-radius:12px} .day-visual{max-height:130px}
@@ -113,7 +134,7 @@ body.lang-zh [data-zh]{display:inline}
   cursor:pointer;backdrop-filter:blur(8px);letter-spacing:.06em;transition:all .2s;font-family:inherit}
 .lang-btn:hover{background:rgba(245,194,24,.2);border-color:#f5c218;color:#f5c218}
 .lang-btn.active{background:#f5c218;border-color:#f5c218;color:#0a1628}
-/* Star rating overlay on place images */
+/* Itinerary priority overlay on place images */
 .place-img{position:relative}
 .img-rating{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,transparent 100%);padding:10px 3px 3px;display:flex;align-items:center;justify-content:center;gap:3px;pointer-events:none}
 .star-bar{position:relative;display:inline-block;font-size:9px;letter-spacing:.5px;line-height:1;color:rgba(255,255,255,.28)}
@@ -129,6 +150,8 @@ body.lang-zh .lang-zh-only{display:inline}
 .overview-sidebar{flex:0 0 270px;padding-top:4px}
 .overview-sidebar .ov-legend{padding:14px 0 6px;flex-direction:column;gap:8px}
 .overview-map-wrap{flex:1;min-width:0;border-radius:16px;overflow:hidden}
+.borough-thumb{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px;box-shadow:0 8px 24px rgba(23,32,51,.07)}
+.borough-thumb img{display:block;width:100%;height:auto;border-radius:8px}
 @media(max-width:900px){.overview-layout{flex-direction:column}.overview-sidebar{flex:none;width:100%}.overview-sidebar .ov-legend{flex-direction:row;flex-wrap:wrap}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
@@ -145,7 +168,6 @@ body.lang-zh .lang-zh-only{display:inline}
     <p style="font-size:15px;color:#f5c218;font-weight:700;margin:0 0 8px;letter-spacing:.04em;text-shadow:0 1px 6px rgba(0,0,0,.9)"><span data-fr="Un voyage sur mesure pour David &amp; Echo"></span><span data-zh="为 David &amp; Echo 定制"></span></p>
     <p><span data-fr="Du 19 au 24 septembre 2026, David &amp; Echo explorent New York. De Midtown à Brooklyn, de la Statue de la Liberté à Harlem, six jours pour découvrir les quartiers phares de Manhattan à pied et en métro."></span><span data-zh="从中城地标到布鲁克林，从自由女神到哈莱姆，六天覆盖曼哈顿各区精华，以步行与地铁为主，慢下来感受城市人文。"></span></p>
     <div class="badges">
-      <span class="badge highlight">David &amp; Echo</span>
       <span class="badge"><span data-fr="19–24 septembre 2026"></span><span data-zh="2026年9月19–24日"></span></span>
       <span class="badge"><span data-fr="6 jours à New York"></span><span data-zh="6天纽约之旅"></span></span>
       <span class="badge"><span data-fr="À pied + métro"></span><span data-zh="步行＋地铁为主"></span></span>
@@ -295,7 +317,9 @@ body.lang-zh .lang-zh-only{display:inline}
           <span style="--c:#e58b2b"><span data-fr="DAY 5 · 9/23 · High Line"></span><span data-zh="DAY 5 · 9/23 · High Line"></span></span>
           <span style="--c:#a13e42"><span data-fr="DAY 6 · 9/24 · Musée · Départ"></span><span data-zh="DAY 6 · 9/24 · 博物馆·出发"></span></span>
         </div>
-        <a class="top-link" href="#day-1" style="color:#3d6fa5;display:inline-block;margin-top:18px"><span data-fr="Voir Jour 1 ↓"></span><span data-zh="跳至第 1 天 ↓"></span></a>
+        <div class="borough-thumb">
+          <img src="assets/nyc-boroughs-thumbnail.png" alt="New York boroughs overview">
+        </div>
       </div>
       <div class="overview-map-wrap">
         <div id="map-overview" class="day-map-container" style="height:720px"></div>
@@ -319,7 +343,11 @@ body.lang-zh .lang-zh-only{display:inline}
       <rect width="1200" height="260" rx="26" fill="url(#pDAY1)"/>
       <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
       <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 1</text>
+      <g transform="translate(28 20)">
+        <rect width="142" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
+        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">⛅ 25° / 16°</text>
+      </g>
+      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 1</text>
       <text x="58" y="102" id="svgd-d1" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月19日 · 周六</text>
       <text x="58" y="152" id="svgt-d1" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">中城经典地标 · MoMA · 百老汇</text>
       <text x="1005" y="166" font-size="112" text-anchor="middle">🏙️</text>
@@ -333,6 +361,34 @@ body.lang-zh .lang-zh-only{display:inline}
     <div class="day-heading">
       <p class="route-line"><span data-fr="Grand Central → Bryant Park → Empire State → MoMA → Rockefeller Center → Times Square → Broadway"></span><span data-zh="Grand Central → Bryant Park → Empire State Building → MoMA → Rockefeller Center → Times Square"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
+    </div>
+    <div class="day-brief">
+      <div class="brief-card primary">
+        <span class="brief-label"><span data-fr="Aujourd'hui"></span><span data-zh="今日重点"></span></span>
+        <strong><span data-fr="Midtown classique, art moderne et Broadway"></span><span data-zh="中城经典、现代艺术与百老汇"></span></strong>
+        <span><span data-fr="Une journée très urbaine : architecture, musée, lumières et spectacle du soir."></span><span data-zh="城市感最强的一天：建筑、博物馆、灯光和晚间演出连在一起。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Intensité"></span><span data-zh="强度"></span></span>
+        <strong><span data-fr="Moyen-haut"></span><span data-zh="中高"></span></strong>
+        <div class="brief-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <span><span data-fr="~12k-15k pas, surtout à pied."></span><span data-zh="约 12k-15k 步，以步行为主。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À réserver"></span><span data-zh="提前处理"></span></span>
+        <strong>MoMA · Broadway</strong>
+        <span><span data-fr="Acheter les billets avant le départ, surtout le spectacle."></span><span data-zh="建议出发前买票，百老汇优先级最高。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À alléger"></span><span data-zh="可删减"></span></span>
+        <strong><span data-fr="Empire State extérieur"></span><span data-zh="帝国大厦外观"></span></strong>
+        <span><span data-fr="Si la journée est lente, passer plus vite Bryant Park / 5e Avenue."></span><span data-zh="如果节奏慢，Bryant Park / 第五大道可快速经过。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Plan B"></span><span data-zh="备选方案"></span></span>
+        <strong><span data-fr="Pluie : MoMA + Grand Central"></span><span data-zh="雨天：MoMA + 中央车站"></span></strong>
+        <span><span data-fr="Réduire les rues extérieures et garder Broadway."></span><span data-zh="减少户外街区，把百老汇保留。"></span></span>
+      </div>
     </div>
     <div id="map-d1" class="day-map-container"></div>
     <div class="table-wrap"><table><thead>
@@ -375,7 +431,11 @@ body.lang-zh .lang-zh-only{display:inline}
       <rect width="1200" height="260" rx="26" fill="url(#pDAY2)"/>
       <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
       <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 2</text>
+      <g transform="translate(28 20)">
+        <rect width="142" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
+        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">☀️ 26° / 17°</text>
+      </g>
+      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 2</text>
       <text x="58" y="102" id="svgd-d2" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月20日 · 周日</text>
       <text x="58" y="152" id="svgt-d2" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">中央公园 · 大都会博物馆 · 哈莱姆</text>
       <text x="1005" y="166" font-size="112" text-anchor="middle">🌳</text>
@@ -389,6 +449,34 @@ body.lang-zh .lang-zh-only{display:inline}
     <div class="day-heading">
       <p class="route-line"><span data-fr="Columbus Circle → Central Park → The Met → Morningside Heights → Harlem → Harlem Jazz"></span><span data-zh="Columbus Circle → 中央公园 → The Met → Morningside Heights → 哈莱姆 → Harlem Jazz"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
+    </div>
+    <div class="day-brief">
+      <div class="brief-card primary">
+        <span class="brief-label"><span data-fr="Aujourd'hui"></span><span data-zh="今日重点"></span></span>
+        <strong><span data-fr="Parc, grand musée et soirée Harlem"></span><span data-zh="公园、大都会博物馆与哈莱姆夜晚"></span></strong>
+        <span><span data-fr="La journée la plus culturelle : nature le matin, musée dense l'après-midi, musique le soir."></span><span data-zh="文化浓度最高的一天：上午公园，下午大都会，晚上音乐现场。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Intensité"></span><span data-zh="强度"></span></span>
+        <strong><span data-fr="Élevé"></span><span data-zh="高"></span></strong>
+        <div class="brief-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <span><span data-fr="Longue marche + 5h de musée."></span><span data-zh="步行长，且博物馆信息量大。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À réserver"></span><span data-zh="提前处理"></span></span>
+        <strong>The Met · Jazz</strong>
+        <span><span data-fr="Vérifier les salles ouvertes et réserver le club du soir."></span><span data-zh="确认大都会开放展厅，晚上的爵士场地提前订。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À alléger"></span><span data-zh="可删减"></span></span>
+        <strong>Morningside Heights</strong>
+        <span><span data-fr="À retirer si The Met prend plus de temps."></span><span data-zh="如果大都会看得久，这段可以删。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Plan B"></span><span data-zh="备选方案"></span></span>
+        <strong><span data-fr="Version légère : The Met + Harlem"></span><span data-zh="轻松版：大都会 + 哈莱姆"></span></strong>
+        <span><span data-fr="Réduire Central Park à Bethesda / The Mall."></span><span data-zh="中央公园只保留 Bethesda / The Mall 核心段。"></span></span>
+      </div>
     </div>
     <div id="map-d2" class="day-map-container"></div>
     <div class="table-wrap"><table><thead>
@@ -429,7 +517,11 @@ body.lang-zh .lang-zh-only{display:inline}
       <rect width="1200" height="260" rx="26" fill="url(#pDAY3)"/>
       <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
       <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 3</text>
+      <g transform="translate(28 20)">
+        <rect width="142" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
+        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">🌤️ 25° / 15°</text>
+      </g>
+      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 3</text>
       <text x="58" y="102" id="svgd-d3" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月21日 · 周一</text>
       <text x="58" y="152" id="svgt-d3" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">自由女神 · 埃利斯岛 · 华尔街 · 9/11</text>
       <text x="1005" y="166" font-size="112" text-anchor="middle">🗽</text>
@@ -443,6 +535,34 @@ body.lang-zh .lang-zh-only{display:inline}
     <div class="day-heading">
       <p class="route-line"><span data-fr="Battery Park → Liberty Island → Ellis Island → Wall Street → 9/11 Memorial → Oculus → Tribeca"></span><span data-zh="Battery Park → Liberty Island → Ellis Island → Wall Street → 9/11 Memorial → Oculus"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
+    </div>
+    <div class="day-brief">
+      <div class="brief-card primary">
+        <span class="brief-label"><span data-fr="Aujourd'hui"></span><span data-zh="今日重点"></span></span>
+        <strong><span data-fr="Liberté, histoire migratoire et Downtown"></span><span data-zh="自由女神、移民历史与下城记忆"></span></strong>
+        <span><span data-fr="Une journée symbolique, avec ferry le matin et Lower Manhattan l'après-midi."></span><span data-zh="象征意义最强的一天：上午坐船，下午走下城历史线。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Intensité"></span><span data-zh="强度"></span></span>
+        <strong><span data-fr="Élevé"></span><span data-zh="高"></span></strong>
+        <div class="brief-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <span><span data-fr="Départ tôt, sécurité, ferry et plusieurs sites."></span><span data-zh="出发早，有安检、渡轮和多个景点。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À réserver"></span><span data-zh="提前处理"></span></span>
+        <strong><span data-fr="Ferry Liberté · 9/11 Museum"></span><span data-zh="自由女神渡轮 · 9/11 博物馆"></span></strong>
+        <span><span data-fr="Prendre les premiers créneaux si possible."></span><span data-zh="尽量订较早时段，给下午留余量。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À alléger"></span><span data-zh="可删减"></span></span>
+        <strong>One World Observatory</strong>
+        <span><span data-fr="À garder seulement si vous voulez une deuxième vue en hauteur."></span><span data-zh="如果已经看 Edge，这里可只看外观。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Plan B"></span><span data-zh="备选方案"></span></span>
+        <strong><span data-fr="Vent/pluie : Downtown intérieur"></span><span data-zh="风雨天：下城室内线"></span></strong>
+        <span><span data-fr="Réduire Ellis Island et garder 9/11 + Oculus."></span><span data-zh="缩短 Ellis Island，保留 9/11 + Oculus。"></span></span>
+      </div>
     </div>
     <div id="map-d3" class="day-map-container"></div>
     <div class="table-wrap"><table><thead>
@@ -485,7 +605,11 @@ body.lang-zh .lang-zh-only{display:inline}
       <rect width="1200" height="260" rx="26" fill="url(#pDAY4)"/>
       <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
       <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 4</text>
+      <g transform="translate(28 20)">
+        <rect width="142" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
+        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">⛅ 23° / 15°</text>
+      </g>
+      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 4</text>
       <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月22日 · 周二</text>
       <text x="58" y="152" id="svgt-d4" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">布鲁克林 · DUMBO · 大桥 · 华埠 · SoHo</text>
       <text x="1005" y="166" font-size="112" text-anchor="middle">🌉</text>
@@ -499,6 +623,34 @@ body.lang-zh .lang-zh-only{display:inline}
     <div class="day-heading">
       <p class="route-line"><span data-fr="Brooklyn Heights → Brooklyn Bridge Park → DUMBO → Brooklyn Bridge → Chinatown → SoHo → Lower East Side"></span><span data-zh="Brooklyn Heights → Brooklyn Bridge Park → DUMBO → Brooklyn Bridge → Chinatown → SoHo"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
+    </div>
+    <div class="day-brief">
+      <div class="brief-card primary">
+        <span class="brief-label"><span data-fr="Aujourd'hui"></span><span data-zh="今日重点"></span></span>
+        <strong><span data-fr="Brooklyn, pont, Chinatown et SoHo"></span><span data-zh="布鲁克林、大桥、华埠与 SoHo"></span></strong>
+        <span><span data-fr="La journée la plus photographique : skyline, pont, rues historiques et quartiers vivants."></span><span data-zh="最适合拍照的一天：天际线、大桥、历史街区和热闹社区。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Intensité"></span><span data-zh="强度"></span></span>
+        <strong><span data-fr="Élevé"></span><span data-zh="高"></span></strong>
+        <div class="brief-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <span><span data-fr="Longue marche et beaucoup de changements d'ambiance."></span><span data-zh="步行长，街区切换多，体力消耗明显。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À réserver"></span><span data-zh="提前处理"></span></span>
+        <strong><span data-fr="Dîner / soirée LES"></span><span data-zh="LES 晚餐/夜生活"></span></strong>
+        <span><span data-fr="Choisir une adresse à l'avance évite de chercher fatigués."></span><span data-zh="提前选好晚餐或酒吧，避免走累后临时找。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À alléger"></span><span data-zh="可删减"></span></span>
+        <strong>Little Italy · SoHo</strong>
+        <span><span data-fr="Passage rapide si Brooklyn prend plus de temps."></span><span data-zh="如果布鲁克林停留久，这两段可快速经过。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Plan B"></span><span data-zh="备选方案"></span></span>
+        <strong><span data-fr="Fatigue : rester Brooklyn + DUMBO"></span><span data-zh="疲劳版：只保留 Brooklyn + DUMBO"></span></strong>
+        <span><span data-fr="Traverser le pont seulement si l'énergie est bonne."></span><span data-zh="体力好再步行过桥，否则地铁回曼哈顿。"></span></span>
+      </div>
     </div>
     <div id="map-d4" class="day-map-container"></div>
     <div class="table-wrap"><table><thead>
@@ -542,7 +694,11 @@ body.lang-zh .lang-zh-only{display:inline}
       <rect width="1200" height="260" rx="26" fill="url(#pDAY5)"/>
       <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
       <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 5</text>
+      <g transform="translate(28 20)">
+        <rect width="142" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
+        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">🌥️ 22° / 14°</text>
+      </g>
+      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 5</text>
       <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月23日 · 周三</text>
       <text x="58" y="152" id="svgt-d5" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">Hudson Yards · Edge · High Line · 西村</text>
       <text x="1005" y="166" font-size="112" text-anchor="middle">🌇</text>
@@ -556,6 +712,34 @@ body.lang-zh .lang-zh-only{display:inline}
     <div class="day-heading">
       <p class="route-line"><span data-fr="Hudson Yards → Edge → High Line → Chelsea Market → Little Island → West Village → Washington Square"></span><span data-zh="Hudson Yards → Edge → High Line → Chelsea Market → Little Island → West Village"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
+    </div>
+    <div class="day-brief">
+      <div class="brief-card primary">
+        <span class="brief-label"><span data-fr="Aujourd'hui"></span><span data-zh="今日重点"></span></span>
+        <strong><span data-fr="Hudson Yards, High Line et West Village"></span><span data-zh="Hudson Yards、High Line 与西村"></span></strong>
+        <span><span data-fr="Une journée plus fluide : vues modernes, parc linéaire, marché et quartiers à taille humaine."></span><span data-zh="节奏相对顺的一天：现代观景台、线性公园、市集和生活感街区。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Intensité"></span><span data-zh="强度"></span></span>
+        <strong><span data-fr="Moyen-haut"></span><span data-zh="中高"></span></strong>
+        <div class="brief-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <span><span data-fr="Marche continue, mais peu de longs transferts."></span><span data-zh="持续步行，但长距离换乘不多。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À réserver"></span><span data-zh="提前处理"></span></span>
+        <strong>Edge · Little Owl</strong>
+        <span><span data-fr="Réserver un créneau Edge et le dîner si vous gardez Friends."></span><span data-zh="Edge 订时段；如果保留老友记晚餐，餐厅也要订。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À alléger"></span><span data-zh="可删减"></span></span>
+        <strong>Little Island · Meatpacking</strong>
+        <span><span data-fr="À réduire si Chelsea Market est bondé."></span><span data-zh="如果 Chelsea Market 花太久，这两段可压缩。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Plan B"></span><span data-zh="备选方案"></span></span>
+        <strong><span data-fr="Pluie : Edge + Chelsea Market"></span><span data-zh="雨天：Edge + Chelsea Market"></span></strong>
+        <span><span data-fr="Gardez West Village seulement si la météo s'améliore."></span><span data-zh="天气转好再保留西村散步。"></span></span>
+      </div>
     </div>
     <div id="map-d5" class="day-map-container"></div>
     <div class="table-wrap"><table><thead>
@@ -599,7 +783,11 @@ body.lang-zh .lang-zh-only{display:inline}
       <rect width="1200" height="260" rx="26" fill="url(#pDAY6)"/>
       <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
       <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <text x="58" y="75" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 6</text>
+      <g transform="translate(28 20)">
+        <rect width="142" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
+        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">🌦️ 21° / 13°</text>
+      </g>
+      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 6</text>
       <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月24日 · 周四 · 当晚19:00飞机</text>
       <text x="58" y="152" id="svgt-d6" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">自然历史博物馆 · 林肯中心 · 下午出发</text>
       <text x="1005" y="166" font-size="112" text-anchor="middle">🎷</text>
@@ -613,6 +801,34 @@ body.lang-zh .lang-zh-only{display:inline}
     <div class="day-heading">
       <p class="route-line"><span data-fr="AMNH → Déjeuner → Lincoln Center → Riverside Park → ✈ Vers l'aéroport"></span><span data-zh="AMNH → 上西区午餐 → Lincoln Center → Riverside Park → ✈ 前往机场"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
+    </div>
+    <div class="day-brief">
+      <div class="brief-card primary">
+        <span class="brief-label"><span data-fr="Aujourd'hui"></span><span data-zh="今日重点"></span></span>
+        <strong><span data-fr="Musée du matin et départ sans stress"></span><span data-zh="上午博物馆，下午稳妥离境"></span></strong>
+        <span><span data-fr="La priorité n'est pas de tout voir, mais d'arriver à l'aéroport avec marge."></span><span data-zh="这天重点不是多看景点，而是稳稳留出机场时间。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Intensité"></span><span data-zh="强度"></span></span>
+        <strong><span data-fr="Moyen"></span><span data-zh="中等"></span></strong>
+        <div class="brief-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <span><span data-fr="Peu de marche, mais contrainte horaire forte."></span><span data-zh="步行不多，但时间边界很硬。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À réserver"></span><span data-zh="提前处理"></span></span>
+        <strong>AMNH · Taxi/Uber</strong>
+        <span><span data-fr="Réserver le musée et prévoir la voiture avant 15h."></span><span data-zh="自然历史博物馆提前订；15:00 前安排好车。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="À alléger"></span><span data-zh="可删减"></span></span>
+        <strong>Riverside Park</strong>
+        <span><span data-fr="À supprimer si bagages, météo ou trafic deviennent compliqués."></span><span data-zh="如果行李、天气或路况复杂，直接删掉。"></span></span>
+      </div>
+      <div class="brief-card">
+        <span class="brief-label"><span data-fr="Règle"></span><span data-zh="硬规则"></span></span>
+        <strong><span data-fr="Quitter Manhattan à 15h00"></span><span data-zh="15:00 离开曼哈顿"></span></strong>
+        <span><span data-fr="Si JFK : viser l'aéroport avant 16h30."></span><span data-zh="如果是 JFK，目标 16:30 前到机场。"></span></span>
+      </div>
     </div>
     <div id="map-d6" class="day-map-container"></div>
     <div class="table-wrap"><table><thead>
@@ -854,16 +1070,6 @@ body.lang-zh .lang-zh-only{display:inline}
 </script>
 <script>
 (function(){
-  /* Hero background — Statue of Liberty via Wikipedia */
-  fetch('https://en.wikipedia.org/w/api.php?action=query&titles=Statue_of_Liberty&prop=pageimages&format=json&pithumbsize=1600&origin=*')
-    .then(function(r){return r.json();})
-    .then(function(d){
-      var pages=d.query.pages, pg=pages[Object.keys(pages)[0]];
-      if(pg.thumbnail&&pg.thumbnail.source){
-        document.querySelector('.hero').style.backgroundImage='url('+pg.thumbnail.source+')';
-      }
-    }).catch(function(){});
-
   var imgs = document.querySelectorAll('td.place-img img[data-wiki]');
   imgs.forEach(function(img){
     var title = img.getAttribute('data-wiki');
@@ -917,48 +1123,48 @@ body.lang-zh .lang-zh-only{display:inline}
 <script>
 (function(){
   var R={
-    'Grand_Central_Terminal':4.8,
-    'Chrysler_Building':4.7,
-    'New_York_Public_Library':4.8,
-    'Empire_State_Building':4.7,
-    'Museum_of_Modern_Art':4.7,
-    'Rockefeller_Center':4.7,
-    'Times_Square':4.4,
-    'Broadway_theatre':4.8,
-    'Columbus_Circle':4.6,
-    'Central_Park':4.8,
-    'Metropolitan_Museum_of_Art':4.8,
-    'Morningside_Heights,_Manhattan':4.7,
-    'Harlem':4.5,
+    'Grand_Central_Terminal':4.4,
+    'Chrysler_Building':3.2,
+    'New_York_Public_Library':4.2,
+    'Empire_State_Building':3.6,
+    'Museum_of_Modern_Art':4.9,
+    'Rockefeller_Center':4.3,
+    'Times_Square':4.1,
+    'Broadway_theatre':5.0,
+    'Columbus_Circle':3.2,
+    'Central_Park':5.0,
+    'Metropolitan_Museum_of_Art':5.0,
+    'Morningside_Heights,_Manhattan':3.4,
+    'Harlem':4.3,
     'Jazz_music':4.6,
-    'Battery_Park':4.7,
-    'Statue_of_Liberty':4.8,
-    'Ellis_Island':4.8,
-    'Financial_District,_Manhattan':4.5,
-    'National_September_11_Memorial_%26_Museum':4.9,
-    'Oculus,_New_York_City':4.6,
-    'One_World_Trade_Center':4.7,
-    'Brooklyn_Heights_Promenade':4.9,
-    'Brooklyn_Bridge_Park':4.8,
-    'Dumbo,_Brooklyn':4.7,
-    'Brooklyn_Bridge':4.8,
-    'New_York_City_Hall':4.5,
-    'Chinatown,_Manhattan':4.4,
-    'Little_Italy,_Manhattan':4.4,
-    'SoHo,_Manhattan':4.6,
-    'Lower_East_Side':4.5,
-    'Hudson_Yards,_Manhattan':4.5,
-    'Edge_(observation_deck)':4.7,
-    'High_Line_(New_York_City)':4.7,
-    'Chelsea_Market':4.6,
-    'Little_Island_(park)':4.7,
-    'Meatpacking_District,_Manhattan':4.5,
+    'Battery_Park':3.6,
+    'Statue_of_Liberty':5.0,
+    'Ellis_Island':4.3,
+    'Financial_District,_Manhattan':4.0,
+    'National_September_11_Memorial_%26_Museum':4.8,
+    'Oculus,_New_York_City':3.8,
+    'One_World_Trade_Center':4.1,
+    'Brooklyn_Heights_Promenade':4.8,
+    'Brooklyn_Bridge_Park':4.4,
+    'Dumbo,_Brooklyn':4.5,
+    'Brooklyn_Bridge':4.9,
+    'New_York_City_Hall':3.1,
+    'Chinatown,_Manhattan':4.0,
+    'Little_Italy,_Manhattan':3.2,
+    'SoHo,_Manhattan':4.1,
+    'Lower_East_Side':4.2,
+    'Hudson_Yards,_Manhattan':3.7,
+    'Edge_(observation_deck)':4.6,
+    'High_Line_(New_York_City)':4.8,
+    'Chelsea_Market':4.2,
+    'Little_Island_(park)':3.9,
+    'Meatpacking_District,_Manhattan':3.5,
     'West_Village':4.7,
-    'Friends_(TV_series)':4.6,
-    'Washington_Square_Park':4.7,
-    'American_Museum_of_Natural_History':4.8,
-    'Lincoln_Center_for_the_Performing_Arts':4.7,
-    'Riverside_Park_(Manhattan)':4.7
+    'Friends_(TV_series)':4.1,
+    'Washington_Square_Park':4.4,
+    'American_Museum_of_Natural_History':4.7,
+    'Lincoln_Center_for_the_Performing_Arts':3.8,
+    'Riverside_Park_(Manhattan)':3.9
   };
   document.querySelectorAll('.place-img img[data-wiki]').forEach(function(img){
     var w=img.getAttribute('data-wiki');
@@ -967,7 +1173,7 @@ body.lang-zh .lang-zh-only{display:inline}
     var pct=(r/5*100).toFixed(1)+'%';
     var d=document.createElement('div');
     d.className='img-rating';
-    d.innerHTML='<span class="star-bar" style="--pct:'+pct+'"></span><span class="rating-num">'+r.toFixed(1)+'</span>';
+    d.innerHTML='<span class="star-bar" style="--pct:'+pct+'"></span><span class="rating-num">P'+r.toFixed(1)+'</span>';
     img.parentElement.appendChild(d);
   });
 })();
