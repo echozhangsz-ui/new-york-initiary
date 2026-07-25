@@ -114,6 +114,13 @@ body.lang-zh [data-zh]{display:inline}
   cursor:pointer;backdrop-filter:blur(8px);letter-spacing:.06em;transition:all .2s;font-family:inherit}
 .lang-btn:hover{background:rgba(245,194,24,.2);border-color:#f5c218;color:#f5c218}
 .lang-btn.active{background:#f5c218;border-color:#f5c218;color:#0a1628}
+/* Star rating overlay on place images */
+.place-img{position:relative}
+.img-rating{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,transparent 100%);padding:10px 3px 3px;display:flex;align-items:center;justify-content:center;gap:3px;pointer-events:none}
+.star-bar{position:relative;display:inline-block;font-size:9px;letter-spacing:.5px;line-height:1;color:rgba(255,255,255,.28)}
+.star-bar::after{content:'★★★★★'}
+.star-bar::before{content:'★★★★★';position:absolute;left:0;top:0;overflow:hidden;width:var(--pct,0%);color:#f5c218;white-space:nowrap}
+.rating-num{font-size:9px;font-weight:900;color:#fff;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.7)}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
@@ -884,6 +891,64 @@ body.lang-zh [data-zh]{display:inline}
   };
   var saved;try{saved=localStorage.getItem('nyc-lang');}catch(e){}
   window.setLang(saved||'fr');
+})();
+</script>
+<script>
+(function(){
+  var R={
+    'Grand_Central_Terminal':4.8,
+    'Chrysler_Building':4.7,
+    'New_York_Public_Library':4.8,
+    'Empire_State_Building':4.7,
+    'Museum_of_Modern_Art':4.7,
+    'Rockefeller_Center':4.7,
+    'Times_Square':4.4,
+    'Broadway_theatre':4.8,
+    'Columbus_Circle':4.6,
+    'Central_Park':4.8,
+    'Metropolitan_Museum_of_Art':4.8,
+    'Morningside_Heights,_Manhattan':4.7,
+    'Harlem':4.5,
+    'Jazz_music':4.6,
+    'Battery_Park':4.7,
+    'Statue_of_Liberty':4.8,
+    'Ellis_Island':4.8,
+    'Financial_District,_Manhattan':4.5,
+    'National_September_11_Memorial_%26_Museum':4.9,
+    'Oculus,_New_York_City':4.6,
+    'One_World_Trade_Center':4.7,
+    'Brooklyn_Heights_Promenade':4.9,
+    'Brooklyn_Bridge_Park':4.8,
+    'Dumbo,_Brooklyn':4.7,
+    'Brooklyn_Bridge':4.8,
+    'New_York_City_Hall':4.5,
+    'Chinatown,_Manhattan':4.4,
+    'Little_Italy,_Manhattan':4.4,
+    'SoHo,_Manhattan':4.6,
+    'Lower_East_Side':4.5,
+    'Hudson_Yards,_Manhattan':4.5,
+    'Edge_(observation_deck)':4.7,
+    'High_Line_(New_York_City)':4.7,
+    'Chelsea_Market':4.6,
+    'Little_Island_(park)':4.7,
+    'Meatpacking_District,_Manhattan':4.5,
+    'West_Village':4.7,
+    'Friends_(TV_series)':4.6,
+    'Washington_Square_Park':4.7,
+    'American_Museum_of_Natural_History':4.8,
+    'Lincoln_Center_for_the_Performing_Arts':4.7,
+    'Riverside_Park_(Manhattan)':4.7
+  };
+  document.querySelectorAll('.place-img img[data-wiki]').forEach(function(img){
+    var w=img.getAttribute('data-wiki');
+    var r=R[w];
+    if(!r) return;
+    var pct=(r/5*100).toFixed(1)+'%';
+    var d=document.createElement('div');
+    d.className='img-rating';
+    d.innerHTML='<span class="star-bar" style="--pct:'+pct+'"></span><span class="rating-num">'+r.toFixed(1)+'</span>';
+    img.parentElement.appendChild(d);
+  });
 })();
 </script>
 </body>
