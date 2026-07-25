@@ -16,15 +16,15 @@ body{margin:0;background:var(--paper);color:var(--ink);
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.55}
 .hero{background-color:#0a1628;background-size:cover;background-position:center 30%;color:white;padding:72px 24px 54px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,rgba(6,14,28,.94) 0%,rgba(6,14,28,.82) 50%,rgba(6,14,28,.75) 100%)}
-.hero:after{content:"NYC";position:absolute;right:-20px;bottom:-80px;font-size:320px;font-weight:900;color:rgba(245,194,24,.045);pointer-events:none}
+  background:linear-gradient(to right,rgba(4,10,22,.96) 0%,rgba(4,10,22,.88) 60%,rgba(4,10,22,.80) 100%)}
+.hero:after{content:"NYC";position:absolute;right:-20px;bottom:-80px;font-size:320px;font-weight:900;color:rgba(245,194,24,.04);pointer-events:none}
 .hero-inner,.content{max-width:1320px;margin:auto}
-.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#f5c218;font-weight:800}
-h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:920px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
-.hero p{max-width:820px;color:rgba(255,255,255,.92);font-size:17px;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#f5c218;font-weight:800;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:920px;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.8)}
+.hero p{max-width:820px;color:#fff;font-size:17px;text-shadow:0 1px 8px rgba(0,0,0,.9)}
 .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);padding:8px 14px;border-radius:999px;font-size:13px;color:#fff}
-.badge.highlight{background:rgba(245,194,24,.22);border-color:rgba(245,194,24,.65);color:#f5c218;font-weight:700}
+.badge{background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.50);padding:8px 14px;border-radius:999px;font-size:13px;color:#fff;font-weight:600}
+.badge.highlight{background:rgba(245,194,24,.28);border-color:#f5c218;color:#f5c218;font-weight:700}
 .nav-wrap{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:0 6px 25px rgba(23,32,51,.06)}
 .day-nav{max-width:1320px;margin:auto;padding:10px 20px;display:flex;gap:8px;overflow:auto}
 .day-nav a{color:var(--ink);text-decoration:none;white-space:nowrap;padding:9px 13px;border-radius:10px;border:1px solid var(--line);font-size:13px;font-weight:800}
@@ -142,7 +142,7 @@ body.lang-zh .lang-zh-only{display:inline}
   <div class="hero-inner">
     <div class="kicker">NEW YORK · SEPT 19–24, 2026</div>
     <h1><span data-fr="New York · 6 Jours"></span><span data-zh="纽约 6 天行程"></span></h1>
-    <p style="font-size:15px;color:rgba(245,194,24,.85);font-weight:700;margin:0 0 8px;letter-spacing:.04em"><span data-fr="Un voyage sur mesure pour David &amp; Echo"></span><span data-zh="为 David &amp; Echo 定制"></span></p>
+    <p style="font-size:15px;color:#f5c218;font-weight:700;margin:0 0 8px;letter-spacing:.04em;text-shadow:0 1px 6px rgba(0,0,0,.9)"><span data-fr="Un voyage sur mesure pour David &amp; Echo"></span><span data-zh="为 David &amp; Echo 定制"></span></p>
     <p><span data-fr="Du 19 au 24 septembre 2026, David &amp; Echo explorent New York. De Midtown à Brooklyn, de la Statue de la Liberté à Harlem, six jours pour découvrir les quartiers phares de Manhattan à pied et en métro."></span><span data-zh="从中城地标到布鲁克林，从自由女神到哈莱姆，六天覆盖曼哈顿各区精华，以步行与地铁为主，慢下来感受城市人文。"></span></p>
     <div class="badges">
       <span class="badge highlight">David &amp; Echo</span>
