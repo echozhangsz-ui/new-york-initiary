@@ -14,10 +14,9 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.55}
-.hero{background:linear-gradient(135deg,#0a1628 0%,#162238 45%,#0f1d30 100%);color:white;padding:72px 24px 54px;position:relative;overflow:hidden}
+.hero{background-color:#0a1628;background-size:cover;background-position:center 30%;color:white;padding:72px 24px 54px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:repeating-linear-gradient(90deg,rgba(245,194,24,.025) 0,rgba(245,194,24,.025) 1px,transparent 1px,transparent 72px),
-  repeating-linear-gradient(0deg,rgba(245,194,24,.025) 0,rgba(245,194,24,.025) 1px,transparent 1px,transparent 72px)}
+  background:linear-gradient(105deg,rgba(8,18,36,.90) 0%,rgba(8,18,36,.72) 45%,rgba(8,18,36,.60) 100%)}
 .hero:after{content:"NYC";position:absolute;right:-20px;bottom:-80px;font-size:320px;font-weight:900;color:rgba(245,194,24,.055);pointer-events:none}
 .hero-inner,.content{max-width:1320px;margin:auto}
 .kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#f5c218;font-weight:800}
@@ -843,6 +842,16 @@ body.lang-zh [data-zh]{display:inline}
 </script>
 <script>
 (function(){
+  /* Hero background — Statue of Liberty via Wikipedia */
+  fetch('https://en.wikipedia.org/w/api.php?action=query&titles=Statue_of_Liberty&prop=pageimages&format=json&pithumbsize=1600&origin=*')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var pages=d.query.pages, pg=pages[Object.keys(pages)[0]];
+      if(pg.thumbnail&&pg.thumbnail.source){
+        document.querySelector('.hero').style.backgroundImage='url('+pg.thumbnail.source+')';
+      }
+    }).catch(function(){});
+
   var imgs = document.querySelectorAll('td.place-img img[data-wiki]');
   imgs.forEach(function(img){
     var title = img.getAttribute('data-wiki');
