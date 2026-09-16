@@ -39,7 +39,12 @@ h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:
 .content{padding:30px 20px 80px}
 .notice{background:#fff7df;border:1px solid #ead18a;border-radius:16px;padding:16px 18px;margin:0 0 28px;font-size:14px}
 .day-card{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:18px;margin:0 0 32px;scroll-margin-top:86px}
-.day-visual{display:block;width:100%;height:auto;border-radius:20px}
+.day-titlebar{display:flex;align-items:center;gap:16px;padding:12px 16px;border-left:4px solid var(--theme);border-bottom:1px solid var(--line);background:#fafbfc;border-radius:10px 10px 0 0;min-height:76px;box-sizing:border-box}
+.day-number{color:var(--theme);font-size:16px;font-weight:850;white-space:nowrap}
+.day-titlecopy{flex:1;min-width:0}.day-date{margin:0 0 3px;color:var(--muted);font-size:12px;line-height:1.5}
+.day-titlecopy h2{margin:0;font-size:clamp(17px,1.8vw,23px);line-height:1.35;overflow-wrap:anywhere}
+.day-weather{flex-shrink:0;white-space:nowrap;font-size:13px;color:#526074;font-weight:650}
+@media(max-width:600px){.day-titlebar{display:grid;grid-template-columns:1fr auto;gap:6px 10px;padding:10px 12px}.day-number{font-size:13px}.day-titlecopy{grid-column:1/-1;grid-row:2}.day-weather{grid-column:2;grid-row:1;font-size:12px}.day-titlecopy h2{font-size:18px}.day-date{font-size:11px}}
 .day-heading{display:flex;justify-content:space-between;gap:24px;align-items:center;padding:16px 10px 14px}
 .eyebrow{color:var(--theme);font-size:13px;font-weight:900;letter-spacing:.16em;margin:0 0 4px}
 h2{font-size:clamp(26px,3vw,42px);margin:0}
@@ -101,7 +106,7 @@ tbody tr:hover{background:#fafbfd}
 @media(max-width:560px){.day-brief{grid-template-columns:1fr}}
 @media print{
  .nav-wrap,.top-link{display:none} body{background:white} .hero{padding:35px 20px}
- .day-card{box-shadow:none;break-inside:avoid;border-radius:12px} .day-visual{max-height:130px}
+ .day-card{box-shadow:none;break-inside:avoid;border-radius:12px}
  .sources{background:white;color:black} .sources h3{color:black}
 }
 /* ── Weather section ── */
@@ -321,35 +326,7 @@ body.lang-zh .lang-zh-only{display:inline}
 
   <section class="day-card" id="day-1" style="--theme:#e64b4b">
   
-    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="中城地标 · MoMA · 时代广场">
-      <defs>
-        <linearGradient id="gDAY1" x1="0" x2="1">
-          <stop offset="0%" stop-color="#e64b4b"/>
-          <stop offset="100%" stop-color="#17233a"/>
-        </linearGradient>
-        <pattern id="pDAY1" width="90" height="90" patternUnits="userSpaceOnUse">
-          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
-        </pattern>
-      </defs>
-      <rect width="1200" height="260" rx="26" fill="url(#gDAY1)"/>
-      <rect width="1200" height="260" rx="26" fill="url(#pDAY1)"/>
-      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
-      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <g transform="translate(28 20)">
-        <rect width="182" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
-        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">☁️ 22.5° / 15.1°</text>
-      </g>
-      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 1</text>
-      <text x="58" y="102" id="svgd-d1" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月19日 · 周六</text>
-      <text x="58" y="152" id="svgt-d1" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">中城地标 · MoMA · 时代广场</text>
-      <text x="1005" y="166" font-size="112" text-anchor="middle">🏙️</text>
-      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="60" cy="205" r="10" fill="white"/>
-      <circle cx="260" cy="205" r="10" fill="white"/>
-      <circle cx="460" cy="205" r="10" fill="white"/>
-      <circle cx="660" cy="205" r="10" fill="white"/>
-      <circle cx="850" cy="205" r="10" fill="white"/>
-    </svg>
+    <header class="day-titlebar"><div class="day-number">DAY 1</div><div class="day-titlecopy"><p class="day-date"><span data-fr="Sam. 19 sept."></span><span data-zh="9月19日 · 周六"></span></p><h2 id="svgt-d1">中城地标 · MoMA · 时代广场</h2></div><span class="day-weather" aria-label="Weather / 天气">☁️ 22.5° / 15.1°</span></header>
     <div class="day-heading">
       <p class="route-line"><span data-fr="Grand Central → Bryant Park → MoMA → Rockefeller → Times Square"></span><span data-zh="中央车站 → Bryant Park → MoMA → 洛克菲勒中心 → 时代广场"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
@@ -381,35 +358,7 @@ body.lang-zh .lang-zh-only{display:inline}
 
   <section class="day-card" id="day-2" style="--theme:#2f7dc1">
   
-    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="中央公园 · 大都会 · ◎ 爵士">
-      <defs>
-        <linearGradient id="gDAY2" x1="0" x2="1">
-          <stop offset="0%" stop-color="#2f7dc1"/>
-          <stop offset="100%" stop-color="#17233a"/>
-        </linearGradient>
-        <pattern id="pDAY2" width="90" height="90" patternUnits="userSpaceOnUse">
-          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
-        </pattern>
-      </defs>
-      <rect width="1200" height="260" rx="26" fill="url(#gDAY2)"/>
-      <rect width="1200" height="260" rx="26" fill="url(#pDAY2)"/>
-      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
-      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <g transform="translate(28 20)">
-        <rect width="182" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
-        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">🌦️ 24.1° / 17.5°</text>
-      </g>
-      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 2</text>
-      <text x="58" y="102" id="svgd-d2" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月20日 · 周日</text>
-      <text x="58" y="152" id="svgt-d2" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">中央公园 · 大都会 · ◎ 爵士</text>
-      <text x="1005" y="166" font-size="112" text-anchor="middle">🌳</text>
-      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="60" cy="205" r="10" fill="white"/>
-      <circle cx="260" cy="205" r="10" fill="white"/>
-      <circle cx="460" cy="205" r="10" fill="white"/>
-      <circle cx="660" cy="205" r="10" fill="white"/>
-      <circle cx="850" cy="205" r="10" fill="white"/>
-    </svg>
+    <header class="day-titlebar"><div class="day-number">DAY 2</div><div class="day-titlecopy"><p class="day-date"><span data-fr="Dim. 20 sept."></span><span data-zh="9月20日 · 周日"></span></p><h2 id="svgt-d2">中央公园 · 大都会 · ◎ 爵士</h2></div><span class="day-weather" aria-label="Weather / 天气">🌦️ 24.1° / 17.5°</span></header>
     <div class="day-heading">
       <p class="route-line"><span data-fr="Central Park → The Met → Bushwick → ◎ Ornithology"></span><span data-zh="中央公园 → 大都会 → Bushwick → ◎ Ornithology"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
@@ -440,35 +389,7 @@ body.lang-zh .lang-zh-only{display:inline}
 
   <section class="day-card" id="day-3" style="--theme:#289768">
   
-    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="自由女神 · SoHo · ◎ Nolita">
-      <defs>
-        <linearGradient id="gDAY3" x1="0" x2="1">
-          <stop offset="0%" stop-color="#289768"/>
-          <stop offset="100%" stop-color="#17233a"/>
-        </linearGradient>
-        <pattern id="pDAY3" width="90" height="90" patternUnits="userSpaceOnUse">
-          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
-        </pattern>
-      </defs>
-      <rect width="1200" height="260" rx="26" fill="url(#gDAY3)"/>
-      <rect width="1200" height="260" rx="26" fill="url(#pDAY3)"/>
-      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
-      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <g transform="translate(28 20)">
-        <rect width="182" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
-        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">☁️ 21.3° / 14.2°</text>
-      </g>
-      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 3</text>
-      <text x="58" y="102" id="svgd-d3" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月21日 · 周一</text>
-      <text x="58" y="152" id="svgt-d3" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">自由女神 · SoHo · ◎ Nolita</text>
-      <text x="1005" y="166" font-size="112" text-anchor="middle">🗽</text>
-      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="60" cy="205" r="10" fill="white"/>
-      <circle cx="260" cy="205" r="10" fill="white"/>
-      <circle cx="460" cy="205" r="10" fill="white"/>
-      <circle cx="660" cy="205" r="10" fill="white"/>
-      <circle cx="850" cy="205" r="10" fill="white"/>
-    </svg>
+    <header class="day-titlebar"><div class="day-number">DAY 3</div><div class="day-titlecopy"><p class="day-date"><span data-fr="Lun. 21 sept."></span><span data-zh="9月21日 · 周一"></span></p><h2 id="svgt-d3">自由女神 · SoHo · ◎ Nolita</h2></div><span class="day-weather" aria-label="Weather / 天气">☁️ 21.3° / 14.2°</span></header>
     <div class="day-heading">
       <p class="route-line"><span data-fr="Liberty + Ellis Island → ◎ Tribeca → ◎ SoHo → ◎ Nolita → ◎ LES → ◎ Rintintin → ◎ East Village (option)"></span><span data-zh="自由女神与埃利斯岛 → ◎ Tribeca → ◎ SoHo → ◎ Nolita → ◎ 下东区 → ◎ Rintintin → ◎ 东村（可选）"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
@@ -502,35 +423,7 @@ body.lang-zh .lang-zh-only{display:inline}
 
   <section class="day-card" id="day-4" style="--theme:#8d54b6">
   
-    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="◎ 布鲁克林 · 日落渡轮">
-      <defs>
-        <linearGradient id="gDAY4" x1="0" x2="1">
-          <stop offset="0%" stop-color="#8d54b6"/>
-          <stop offset="100%" stop-color="#17233a"/>
-        </linearGradient>
-        <pattern id="pDAY4" width="90" height="90" patternUnits="userSpaceOnUse">
-          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
-        </pattern>
-      </defs>
-      <rect width="1200" height="260" rx="26" fill="url(#gDAY4)"/>
-      <rect width="1200" height="260" rx="26" fill="url(#pDAY4)"/>
-      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
-      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <g transform="translate(28 20)">
-        <rect width="182" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
-        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">☁️ 18.6° / 16.5°</text>
-      </g>
-      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 4</text>
-      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月22日 · 周二</text>
-      <text x="58" y="152" id="svgt-d4" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">◎ 布鲁克林 · 日落渡轮</text>
-      <text x="1005" y="166" font-size="112" text-anchor="middle">🌉</text>
-      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="60" cy="205" r="10" fill="white"/>
-      <circle cx="260" cy="205" r="10" fill="white"/>
-      <circle cx="460" cy="205" r="10" fill="white"/>
-      <circle cx="660" cy="205" r="10" fill="white"/>
-      <circle cx="850" cy="205" r="10" fill="white"/>
-    </svg>
+    <header class="day-titlebar"><div class="day-number">DAY 4</div><div class="day-titlecopy"><p class="day-date"><span data-fr="Mar. 22 sept."></span><span data-zh="9月22日 · 周二"></span></p><h2 id="svgt-d4">◎ 布鲁克林 · 日落渡轮</h2></div><span class="day-weather" aria-label="Weather / 天气">☁️ 18.6° / 16.5°</span></header>
     <div class="day-heading">
       <p class="route-line"><span data-fr="DUMBO → ◎ Five Leaves / Greenpoint → ◎ Williamsburg → ◎ Sunset Park → ◎ ferry → ◎ Memorial → ◎ Wall St"></span><span data-zh="DUMBO → ◎ Five Leaves / Greenpoint → ◎ Williamsburg → ◎ Sunset Park → ◎ 渡轮 → ◎ 纪念广场 → ◎ 华尔街"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
@@ -564,35 +457,7 @@ body.lang-zh .lang-zh-only{display:inline}
 
   <section class="day-card" id="day-5" style="--theme:#e58b2b">
   
-    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="High Line · 百老汇19:00">
-      <defs>
-        <linearGradient id="gDAY5" x1="0" x2="1">
-          <stop offset="0%" stop-color="#e58b2b"/>
-          <stop offset="100%" stop-color="#17233a"/>
-        </linearGradient>
-        <pattern id="pDAY5" width="90" height="90" patternUnits="userSpaceOnUse">
-          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
-        </pattern>
-      </defs>
-      <rect width="1200" height="260" rx="26" fill="url(#gDAY5)"/>
-      <rect width="1200" height="260" rx="26" fill="url(#pDAY5)"/>
-      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
-      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <g transform="translate(28 20)">
-        <rect width="182" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
-        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">🌦️ 17.8° / 15.3°</text>
-      </g>
-      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 5</text>
-      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月23日 · 周三</text>
-      <text x="58" y="152" id="svgt-d5" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">High Line · 百老汇19:00</text>
-      <text x="1005" y="166" font-size="112" text-anchor="middle">🌇</text>
-      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="60" cy="205" r="10" fill="white"/>
-      <circle cx="260" cy="205" r="10" fill="white"/>
-      <circle cx="460" cy="205" r="10" fill="white"/>
-      <circle cx="660" cy="205" r="10" fill="white"/>
-      <circle cx="850" cy="205" r="10" fill="white"/>
-    </svg>
+    <header class="day-titlebar"><div class="day-number">DAY 5</div><div class="day-titlecopy"><p class="day-date"><span data-fr="Mer. 23 sept."></span><span data-zh="9月23日 · 周三"></span></p><h2 id="svgt-d5">High Line · 百老汇19:00</h2></div><span class="day-weather" aria-label="Weather / 天气">🌦️ 17.8° / 15.3°</span></header>
     <div class="day-heading">
       <p class="route-line"><span data-fr="Edge → High Line → Chelsea Market → West Village (court) → dîner 17h → théâtre 18h15 → Broadway 19h"></span><span data-zh="Edge → High Line → Chelsea Market → 西村短逛 → 17:00晚餐 → 18:15到剧院 → 19:00百老汇"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
@@ -626,35 +491,7 @@ body.lang-zh .lang-zh-only{display:inline}
 
   <section class="day-card" id="day-6" style="--theme:#a13e42">
   
-    <svg class="day-visual" viewBox="0 0 1200 260" role="img" aria-label="自然历史博物馆 · 林肯中心 · 下午出发">
-      <defs>
-        <linearGradient id="gDAY6" x1="0" x2="1">
-          <stop offset="0%" stop-color="#a13e42"/>
-          <stop offset="100%" stop-color="#17233a"/>
-        </linearGradient>
-        <pattern id="pDAY6" width="90" height="90" patternUnits="userSpaceOnUse">
-          <path d="M0 90 L45 30 L90 90" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="4"/>
-        </pattern>
-      </defs>
-      <rect width="1200" height="260" rx="26" fill="url(#gDAY6)"/>
-      <rect width="1200" height="260" rx="26" fill="url(#pDAY6)"/>
-      <circle cx="1040" cy="45" r="190" fill="rgba(255,255,255,.08)"/>
-      <circle cx="1130" cy="220" r="150" fill="rgba(255,255,255,.06)"/>
-      <g transform="translate(28 20)">
-        <rect width="182" height="30" rx="15" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="1.5"/>
-        <text x="14" y="21" font-size="16" font-family="Arial, sans-serif" fill="white" font-weight="800">🌧️ 23.7° / 15.8°</text>
-      </g>
-      <text x="58" y="88" font-size="38" font-family="Arial, sans-serif" fill="white" font-weight="800">DAY 6</text>
-      <text x="58" y="102" font-size="20" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.70)" font-weight="600">2026年9月24日 · 周四 · 当晚19:00飞机</text>
-      <text x="58" y="152" id="svgt-d6" font-size="44" font-family="Arial, sans-serif" fill="white" font-weight="800">自然历史博物馆 · 林肯中心 · 下午出发</text>
-      <text x="1005" y="166" font-size="112" text-anchor="middle">🎷</text>
-      <path d="M60 205 H850" stroke="rgba(255,255,255,.6)" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="60" cy="205" r="10" fill="white"/>
-      <circle cx="260" cy="205" r="10" fill="white"/>
-      <circle cx="460" cy="205" r="10" fill="white"/>
-      <circle cx="660" cy="205" r="10" fill="white"/>
-      <circle cx="850" cy="205" r="10" fill="white"/>
-    </svg>
+    <header class="day-titlebar"><div class="day-number">DAY 6</div><div class="day-titlecopy"><p class="day-date"><span data-fr="Jeu. 24 sept."></span><span data-zh="9月24日 · 周四"></span> · <span data-fr="Vol 19h"></span><span data-zh="19:00航班"></span></p><h2 id="svgt-d6">自然历史博物馆 · 林肯中心 · 下午出发</h2></div><span class="day-weather" aria-label="Weather / 天气">🌧️ 23.7° / 15.8°</span></header>
     <div class="day-heading">
       <p class="route-line"><span data-fr="AMNH → Déjeuner → Lincoln Center → Riverside Park → ✈ Vers l'aéroport"></span><span data-zh="AMNH → 上西区午餐 → Lincoln Center → Riverside Park → ✈ 前往机场"></span></p>
       <a class="top-link" href="#top"><span data-fr="Haut de page ↑"></span><span data-zh="返回顶部 ↑"></span></a>
