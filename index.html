@@ -155,7 +155,8 @@ body.lang-zh .lang-zh-only{display:inline}
 .borough-thumb img{display:block;width:100%;height:auto;border-radius:8px}
 @media(max-width:900px){.overview-layout{flex-direction:column}.overview-sidebar{flex:none;width:100%}.overview-sidebar .ov-legend{flex-direction:row;flex-wrap:wrap}}
 .double-circle{color:#ac6420;font-size:22px;font-weight:800;white-space:nowrap}.priority-row{background:#fff3d9}.priority-badge{display:inline-block;background:#802b22;color:#fff;border-radius:5px;padding:4px 8px;margin-top:8px;font-size:12px}.itinerary-key{border-left:4px solid #ac6420;padding:14px 18px;background:#fff8ec;margin-bottom:18px;border-radius:8px;color:#67451e}
-.optional-ferry{margin:16px 10px 4px;padding:12px 16px;background:#faf7f0;border:1px solid #e8ddc8;border-radius:10px;font-size:14px}.optional-ferry summary{cursor:pointer;font-weight:700}.optional-ferry p{line-height:1.7;margin:10px 0 0}.download-pdf{display:inline-flex;align-items:center;background:#f5c218;color:#172033!important;text-decoration:none;padding:10px 16px;border-radius:9px;font-size:14px;font-weight:750;box-shadow:0 3px 10px #0002}.download-pdf:hover{background:#ffda56}.download-pdf:focus-visible{outline:3px solid white;outline-offset:3px}.pdf-hint{display:inline-block;margin:8px 12px;color:#f1f5f9;font-size:12px}@media print{.download-pdf,.pdf-hint{display:none}}</style>
+.optional-ferry{margin:16px 10px 4px;padding:12px 16px;background:#faf7f0;border:1px solid #e8ddc8;border-radius:10px;font-size:14px}.optional-ferry summary{cursor:pointer;font-weight:700}.optional-ferry p{line-height:1.7;margin:10px 0 0}.download-pdf{display:inline-flex;align-items:center;background:#f5c218;color:#172033!important;text-decoration:none;padding:10px 16px;border-radius:9px;font-size:14px;font-weight:750;box-shadow:0 3px 10px #0002}.download-pdf:hover{background:#ffda56}.download-pdf:focus-visible{outline:3px solid white;outline-offset:3px}.pdf-hint{display:inline-block;margin:8px 12px;color:#f1f5f9;font-size:12px}@media print{.download-pdf,.pdf-hint{display:none}}.download-pdf{border:0;cursor:pointer;font-family:inherit}.download-pdf:disabled{opacity:.6;cursor:wait}#pdf-status{font-size:13px;margin:8px 0;min-height:20px}.pdf-rendering{width:1400px!important;min-width:1400px!important}.pdf-rendering .hero-inner,.pdf-rendering .content,.pdf-rendering .day-nav,.pdf-rendering .sources-inner{max-width:1380px}.pdf-rendering .overview-layout{flex-direction:row}.pdf-rendering .overview-sidebar{flex:0 0 270px;width:270px}.pdf-rendering .overview-sidebar .ov-legend{flex-direction:column}.pdf-rendering .weather-grid{grid-template-columns:repeat(6,1fr)}.pdf-rendering .day-brief{grid-template-columns:1.05fr repeat(4,minmax(0,1fr))}.pdf-rendering .brief-card.primary{grid-column:auto}.pdf-rendering .day-titlebar{display:flex}.pdf-rendering .day-heading{display:flex}.pdf-rendering .table-wrap{overflow:visible}.pdf-rendering .nav-wrap{position:static}.pdf-rendering .day-card{padding:18px}.pdf-rendering .day-titlecopy h2{font-size:23px}.pdf-rendering .day-titlecopy{flex:1}.pdf-rendering .hero{padding:72px 24px 54px}.pdf-rendering .content{padding:30px 20px 80px}.pdf-rendering h1{font-size:78px}.pdf-rendering h2{font-size:42px}.pdf-rendering .lang-switch{visibility:hidden}
+</style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
 <body id="top" class="lang-fr">
@@ -169,7 +170,7 @@ body.lang-zh .lang-zh-only{display:inline}
     <h1><span data-fr="New York · 6 Jours"></span><span data-zh="纽约 6 天行程"></span></h1>
     <p style="font-size:15px;color:#f5c218;font-weight:700;margin:0 0 8px;letter-spacing:.04em;text-shadow:0 1px 6px rgba(0,0,0,.9)"><span data-fr="Un voyage sur mesure pour David &amp; Echo"></span><span data-zh="为 David &amp; Echo 定制"></span></p>
     <p><span data-fr="Du 19 au 24 septembre 2026, David &amp; Echo explorent New York. De Midtown à Brooklyn, de la Statue de la Liberté au jazz de Brooklyn, six jours pour découvrir les quartiers phares de Manhattan à pied et en métro."></span><span data-zh="从中城地标到布鲁克林，从自由女神到布鲁克林爵士，六天覆盖曼哈顿各区精华，以步行与地铁为主，慢下来感受城市人文。"></span></p>
-    <p><a id="download-pdf" class="download-pdf" href="output/pdf/new-york-itinerary-fr.pdf" download="New-York-David-Echo-FR.pdf"><span data-fr="↓ Télécharger le PDF"></span><span data-zh="↓ 下载行程 PDF"></span></a><span class="pdf-hint"><span data-fr="Version imprimable · langue sélectionnée"></span><span data-zh="打印版 · 按当前语言下载"></span></span></p>
+    <div class="download-controls"><button id="download-pdf" class="download-pdf" type="button" onclick="downloadItineraryPDF()"><span data-fr="↓ Télécharger le PDF complet"></span><span data-zh="↓ 下载完整网页 PDF"></span></button><span class="pdf-hint"><span data-fr="Couleurs, images et cartes incluses · langue sélectionnée"></span><span data-zh="包含颜色、图片和地图 · 按当前语言导出"></span></span><p id="pdf-status" role="status" aria-live="polite"></p></div>
     <div class="badges">
       <span class="badge"><span data-fr="19–24 septembre 2026"></span><span data-zh="2026年9月19–24日"></span></span>
       <span class="badge"><span data-fr="6 jours à New York"></span><span data-zh="6天纽约之旅"></span></span>
@@ -573,10 +574,11 @@ body.lang-zh .lang-zh-only{display:inline}
     });
   }
 
+  window.exportMaps=[];
   function initMap(id,route,stops){
     var m=L.map(id,{zoomControl:false,scrollWheelZoom:false,dragging:false,
       touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,attributionControl:true});
-    L.tileLayer(tiles,tileOpts).addTo(m);
+    var layer=L.tileLayer(tiles,tileOpts).addTo(m);
     L.polyline(route,{color:'#3d7ee7',weight:5,opacity:0.92,lineJoin:'round'}).addTo(m);
     var bounds=L.latLngBounds();
     stops.forEach(function(s){
@@ -586,7 +588,9 @@ body.lang-zh .lang-zh-only{display:inline}
          {permanent:true,direction:'right',offset:[14,0],className:'stop-label'})
        .addTo(m);
     });
-    m.fitBounds(bounds,{paddingTopLeft:[40,40],paddingBottomRight:[180,40],maxZoom:17});
+    var options={paddingTopLeft:[40,40],paddingBottomRight:[180,40],maxZoom:17};
+    m.fitBounds(bounds,options);
+    window.exportMaps.push({map:m,layer:layer,bounds:bounds,options:options});
   }
 
   window.itineraryRoutes={"1":[{"p":[40.7527,-73.9772],"n":1,"t":"Grand Central"},{"p":[40.7516,-73.9755],"n":2,"t":"Chrysler"},{"p":[40.7531,-73.9824],"n":3,"t":"NYPL / Bryant Park"},{"p":[40.7484,-73.9856],"n":4,"t":"Empire State"},{"p":[40.7473,-73.9878],"n":5,"t":"Koreatown"},{"p":[40.7614,-73.9776],"n":6,"t":"MoMA"},{"p":[40.7587,-73.9787],"n":7,"t":"Rockefeller"},{"p":[40.758,-73.9855],"n":8,"t":"Times Square"}],"2":[{"p":[40.7681,-73.9819],"n":1,"t":"Columbus Circle"},{"p":[40.7736,-73.9724],"n":2,"t":"Central Park"},{"p":[40.7751,-73.9714],"n":3,"t":"Lunch"},{"p":[40.7794,-73.9632],"n":4,"t":"The Met"},{"p":[40.779,-73.958],"n":5,"t":"Upper East Side · dîner / 晚餐"}],"3":[{"p":[40.7032,-74.017],"n":1,"t":"Battery Park"},{"p":[40.6892,-74.0445],"n":2,"t":"Liberty Island"},{"p":[40.6996,-74.0396],"n":3,"t":"Ellis Island"},{"p":[40.703,-74.015],"n":4,"t":"Lunch"},{"p":[40.719,-74.009],"n":5,"t":"◎ Tribeca"},{"p":[40.724,-74.0003],"n":6,"t":"◎ SoHo"},{"p":[40.723,-73.995],"n":7,"t":"◎ Nolita"},{"p":[40.719,-73.988],"n":8,"t":"◎ Lower East Side"},{"p":[40.7214,-73.9948],"n":9,"t":"◎ Rintintin"},{"p":[40.727,-73.985],"n":10,"t":"◎ East Village (option)"}],"4":[{"p":[40.729,-73.954],"n":1,"t":"◎ Greenpoint"},{"p":[40.7238,-73.9515],"n":2,"t":"◎ Five Leaves"},{"p":[40.719,-73.96],"n":3,"t":"◎ Williamsburg"},{"p":[40.7149,-73.9677],"n":4,"t":"◎ Domino Park · sunset"},{"p":[40.6988,-73.9341],"n":5,"t":"◎ Ornithology · 21:00"}],"5":[{"p":[40.7535,-74.0019],"n":1,"t":"Hudson Yards"},{"p":[40.7536,-74.0028],"n":2,"t":"Edge"},{"p":[40.7482,-74.0048],"n":3,"t":"High Line"},{"p":[40.7424,-74.006],"n":4,"t":"Chelsea Market"},{"p":[40.7374,-74.0098],"n":5,"t":"Little Island (option)"},{"p":[40.7334,-74.0052],"n":6,"t":"West Village"},{"p":[40.759,-73.9874],"n":7,"t":"Broadway 19:00 · secteur indicatif / 剧院待定"}]};
@@ -619,7 +623,7 @@ body.lang-zh .lang-zh-only{display:inline}
 (function(){
   var m=L.map('map-overview',{zoomControl:false,scrollWheelZoom:false,dragging:false,
     touchZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,attributionControl:true});
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  var overviewLayer=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     {attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:19}).addTo(m);
 
   /* larrow:true = arrow on left (bubble to right, zone is to the left/west)
@@ -690,7 +694,9 @@ body.lang-zh .lang-zh-only{display:inline}
     L.marker(day.lpos,{icon:L.divIcon({html:b.html,className:'',iconSize:null,iconAnchor:b.anchor})}).addTo(m);
   });
 
-  m.fitBounds(allBounds,{paddingTopLeft:[50,50],paddingBottomRight:[60,40],maxZoom:14});
+  var overviewOptions={paddingTopLeft:[50,50],paddingBottomRight:[60,40],maxZoom:14};
+  m.fitBounds(allBounds,overviewOptions);
+  window.exportMaps.push({map:m,layer:overviewLayer,bounds:allBounds,options:overviewOptions});
 })();
 </script>
 <script>
@@ -727,9 +733,6 @@ body.lang-zh .lang-zh-only{display:inline}
     'svgt-d6':{fr:"Musée d'Histoire Naturelle · Lincoln Center · Départ",zh:'自然历史博物馆 · 林肯中心 · 下午出发'}
   };
   window.setLang=function(lang){
-    var pdfLink=document.getElementById('download-pdf');
-    pdfLink.href='output/pdf/new-york-itinerary-'+lang+'.pdf';
-    pdfLink.download='New-York-David-Echo-'+lang.toUpperCase()+'.pdf';
     document.body.classList.remove('lang-fr','lang-zh');
     document.body.classList.add('lang-'+lang);
     document.querySelectorAll('.lang-btn').forEach(function(b){
@@ -806,5 +809,6 @@ body.lang-zh .lang-zh-only{display:inline}
   });
 })();
 </script>
+<script src="assets/export-pdf.js"></script>
 </body>
 </html>
