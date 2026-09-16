@@ -37,10 +37,6 @@ h1{font-size:clamp(38px,6vw,78px);line-height:1.05;margin:12px 0 20px;max-width:
 .day-nav a:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:8px}
 .day-nav span{font-weight:500;color:var(--muted);margin-left:5px}
 .content{padding:30px 20px 80px}
-.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
-.summary-card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 28px rgba(23,32,51,.05)}
-.summary-card strong{display:block;font-size:28px;margin-bottom:4px}
-.summary-card span{color:var(--muted);font-size:13px}
 .notice{background:#fff7df;border:1px solid #ead18a;border-radius:16px;padding:16px 18px;margin:0 0 28px;font-size:14px}
 .day-card{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:18px;margin:0 0 32px;scroll-margin-top:86px}
 .day-visual{display:block;width:100%;height:auto;border-radius:20px}
@@ -98,7 +94,7 @@ tbody tr:hover{background:#fafbfd}
 .sources a{color:#9fc0ff}
 .footer-note{max-width:1320px;margin:0 auto;padding:18px 24px 38px;color:#717b8d;font-size:12px}
 @media(max-width:850px){
- .hero{padding-top:48px} .summary-grid{grid-template-columns:repeat(2,1fr)} .day-heading{display:block} .top-link{display:inline-block;margin-top:12px}
+ .hero{padding-top:48px} .day-heading{display:block} .top-link{display:inline-block;margin-top:12px}
  .day-card{padding:10px;border-radius:20px} .content{padding-left:10px;padding-right:10px}
  .day-brief{grid-template-columns:1fr 1fr}.brief-card.primary{grid-column:1/-1}
 }
@@ -180,12 +176,6 @@ body.lang-zh .lang-zh-only{display:inline}
   <nav class="day-nav"><a href="#day-1" style="--c:#e64b4b">DAY 1<span><span data-fr="9/19 Midtown"></span><span data-zh="9/19 中城地标"></span></span></a><a href="#day-2" style="--c:#2f7dc1">DAY 2<span><span data-fr="9/20 Central Park"></span><span data-zh="9/20 中央公园"></span></span></a><a href="#day-3" style="--c:#289768">DAY 3<span><span data-fr="9/21 Statue Liberté"></span><span data-zh="9/21 自由女神"></span></span></a><a href="#day-4" style="--c:#8d54b6">DAY 4<span><span data-fr="9/22 Brooklyn"></span><span data-zh="9/22 布鲁克林"></span></span></a><a href="#day-5" style="--c:#e58b2b">DAY 5<span><span data-fr="9/23 High Line"></span><span data-zh="9/23 High Line"></span></span></a><a href="#day-6" style="--c:#a13e42">DAY 6<span><span data-fr="9/24 Musée · Départ"></span><span data-zh="9/24 博物馆·出发"></span></span></a></nav>
 </div>
 <main class="content">
-  <div class="summary-grid">
-    <div class="summary-card"><strong>6 DAYS</strong><span><span data-fr="Midtown · Uptown · Downtown · Brooklyn"></span><span data-zh="中城、上城、下城和布鲁克林"></span></span></div>
-    <div class="summary-card"><strong>40+</strong><span><span data-fr="Sites, quartiers &amp; expériences culturelles"></span><span data-zh="景点、街区与文化体验"></span></span></div>
-    <div class="summary-card"><strong>3</strong><span><span data-fr="Grands musées"></span><span data-zh="重点博物馆"></span></span></div>
-    <div class="summary-card"><strong>David &amp; Echo</strong><span><span data-fr="19–24 septembre 2026"></span><span data-zh="2026年9月19–24日"></span></span></div>
-  </div>
   <div class="notice"><span class="lang-fr-only"><strong>Tarifs :</strong> Les prix varient selon la date, l'horaire, les promotions et les taxes. Les tarifs indiqués sont des références consultées en juillet 2026 pour un adulte. Vérifiez toujours sur le site officiel avant d'acheter.</span><span class="lang-zh-only"><strong>门票说明：</strong>票价会随日期、时段、促销和税费变化。表中价格是2026年7月查询到的成人参考价或价格区间，购票前应以景点官网结算页面为准。</span></div>
 
   <section class="day-card" id="weather">
